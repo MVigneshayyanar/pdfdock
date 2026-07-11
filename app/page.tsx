@@ -113,7 +113,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <CameraScanner />
+      {/* <CameraScanner /> */}
     </div>
   );
 }

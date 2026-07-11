@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import InstallPrompt from "@/components/InstallPrompt";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -22,6 +23,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://pdfdock.tech"),
+  manifest: "/manifest.json",
   title: {
     default: "PDFDock — Free Private PDF & Image Tools Online",
     template: "%s | PDFDock"
@@ -108,6 +110,18 @@ export default function RootLayout({
           </div>
         </main>
         <Footer />
+        <InstallPrompt />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js');
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );
