@@ -50,6 +50,9 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
     ],
+    apple: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ]
   },
   openGraph: {
     title: "PDFDock — Free Private PDF & Image Tools Online",
