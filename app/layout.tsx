@@ -71,10 +71,9 @@ export const metadata: Metadata = {
     description: "Merge, split, compress, protect, watermark, resize, crop, and convert files — 100% private, no upload.",
     images: ["/og-image.png"],
   },
-  // Placeholder — add your Google Search Console verification code here:
-  // verification: {
-  //   google: "YOUR_GOOGLE_VERIFICATION_CODE",
-  // },
+  verification: {
+    google: "-NTsq4bU3wse44DgqCfbwIcVtnVP2oAEAUZYzy-cSpg",
+  },
 };
 
 export default function RootLayout({

@@ -1028,7 +1028,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
 
       {/* Google AdSense Responsive Banner */}
       {isMounted && (
-        <div className="w-full my-4 flex justify-center bg-white border border-hairline rounded-xl p-4 shadow-sm min-h-[100px] overflow-hidden">
+        <div className="w-full my-4 flex justify-center overflow-hidden">
           <ins
             className="adsbygoogle"
             style={{ display: "block", width: "100%" }}
