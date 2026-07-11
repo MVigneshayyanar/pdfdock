@@ -13,6 +13,7 @@ import {
   Scissors,
   Minimize2,
   RotateCw,
+  RotateCcw,
   Trash2,
   FileImage,
   Image as ImageIcon,
@@ -25,6 +26,7 @@ import Dropzone from "@/components/Dropzone";
 import FileList from "@/components/FileList";
 import ProcessingState from "@/components/ProcessingState";
 import ResultCard from "@/components/ResultCard";
+import PreviewCanvas from "@/components/PreviewCanvas";
 import {
   mergePDFs,
   splitPDF,
@@ -191,7 +193,6 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
   const router = useRouter();
 
   const config = TOOL_CONFIGS[slug];
-  const hasOptions = ["split-pdf", "compress-pdf", "rotate-pdf", "remove-pages", "add-watermark", "add-page-numbers", "protect-pdf", "compress-image", "resize-image", "convert-image", "crop-image"].includes(slug);
 
   // States
   const [files, setFiles] = useState<File[]>([]);
@@ -207,6 +208,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const [pageCount, setPageCount] = useState<number>(0);
 
   // Settings states based on selected tool
   const [splitRange, setSplitRange] = useState("all");
@@ -219,7 +221,9 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
   const [watermarkPos, setWatermarkPos] = useState<"center" | "top-left" | "top-right" | "bottom-left" | "bottom-right">("center");
   const [pageNumPos, setPageNumPos] = useState<"top" | "bottom">("bottom");
   const [pageNumAlign, setPageNumAlign] = useState<"left" | "center" | "right">("center");
+  const [pageNumFormat, setPageNumFormat] = useState<"page-n-of-total" | "n-of-total" | "n">("page-n-of-total");
   const [pdfPassword, setPdfPassword] = useState("");
+  const [isPdfPasswordRequired, setIsPdfPasswordRequired] = useState(false);
   const [pdfCompressQuality, setPdfCompressQuality] = useState(0.5);
   const [pdfCompressScale, setPdfCompressScale] = useState(1.0);
   const [imgCompressQuality, setImgCompressQuality] = useState(0.8);
@@ -236,9 +240,12 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
   const [cropY, setCropY] = useState(0);
   const [cropW, setCropW] = useState(400);
   const [cropH, setCropH] = useState(400);
+  const [cropShape, setCropShape] = useState<"rect" | "circle">("rect");
 
   // Images to PDF options
   const [fileRotations, setFileRotations] = useState<number[]>([]);
+
+  const hasOptions = ["split-pdf", "compress-pdf", "rotate-pdf", "remove-pages", "add-watermark", "add-page-numbers", "protect-pdf", "compress-image", "resize-image", "convert-image", "crop-image"].includes(slug) || isPdfPasswordRequired;
 
   useEffect(() => {
     setIsMounted(true);
@@ -259,6 +266,44 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
       }
     }
   }, [slug, isMounted]);
+
+  useEffect(() => {
+    if (slug === "remove-pages" && files.length > 0) {
+      const loadPageCount = async () => {
+        try {
+          const pdfjs = await import("pdfjs-dist");
+          pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+          const arrayBuffer = await files[0].arrayBuffer();
+          const loadingTask = pdfjs.getDocument({ data: arrayBuffer });
+          const pdf = await loadingTask.promise;
+          setPageCount(pdf.numPages);
+        } catch (e) {
+          console.error("Failed to load PDF page count:", e);
+        }
+      };
+      loadPageCount();
+    } else {
+      setPageCount(0);
+    }
+  }, [files, slug]);
+
+  const getRemovedPages = (): number[] => {
+    return removePagesRange
+      .split(",")
+      .map((p) => parseInt(p.trim(), 10))
+      .filter((p) => !isNaN(p) && p > 0 && p <= pageCount);
+  };
+
+  const togglePageRemoved = (p: number) => {
+    const removed = getRemovedPages();
+    let newRemoved: number[];
+    if (removed.includes(p)) {
+      newRemoved = removed.filter((x) => x !== p);
+    } else {
+      newRemoved = [...removed, p].sort((a, b) => a - b);
+    }
+    setRemovePagesRange(newRemoved.join(", "));
+  };
 
   // Adjust aspect ratio locks
   const handleWidthChange = (val: number) => {
@@ -349,6 +394,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
 
   const handleProcess = async () => {
     if (files.length === 0) return;
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setIsProcessing(true);
     setProgress(20);
     setError(null);
@@ -388,7 +434,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
         }
 
         case "compress-pdf":
-          outputBytes = await compressPDF(files[0], pdfCompressScale, pdfCompressQuality);
+          outputBytes = await compressPDF(files[0], pdfCompressScale, pdfCompressQuality, pdfPassword);
           outputName = `${baseName}_compressed.pdf`;
           break;
 
@@ -418,7 +464,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
           break;
 
         case "pdf-to-images": {
-          const imgs = await pdfToImages(files[0]);
+          const imgs = await pdfToImages(files[0], pdfPassword);
           setProgress(70);
           const JSZip = (await import("jszip")).default;
           const zip = new JSZip();
@@ -444,6 +490,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
           outputBytes = await addPageNumbers(files[0], {
             position: pageNumPos,
             alignment: pageNumAlign,
+            format: pageNumFormat,
           });
           outputName = `${baseName}_numbered.pdf`;
           break;
@@ -477,9 +524,10 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
           outputBlob = await cropImage(
             files[0],
             { x: cropX, y: cropY, width: cropW, height: cropH },
-            imgTargetFormat
+            imgTargetFormat,
+            cropShape
           );
-          const extCr = imgTargetFormat.split("/")[1];
+          const extCr = cropShape === "circle" ? "png" : imgTargetFormat.split("/")[1];
           outputName = `${baseName}_cropped.${extCr === "jpeg" ? "jpg" : extCr}`;
           break;
 
@@ -587,7 +635,8 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
 
         {/* Configurations Interface */}
         {!isProcessing && !result && files.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* File List Panel */}
               <div className={`${hasOptions ? "md:col-span-2" : "md:col-span-3"} border border-hairline rounded-xl bg-white p-5 space-y-4`}>
                 <h3 className="font-display font-bold text-sm text-ink border-b border-hairline pb-2 flex justify-between">
@@ -611,6 +660,8 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
               )}
               
               <FileList files={files} onRemove={handleRemoveFile} onReorder={handleReorder} rotations={fileRotations} onRotate={handleRotate} />
+
+
             </div>
 
             {/* Options Configuration Panel */}
@@ -622,8 +673,27 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
                   Tool Options
                 </h3>
 
-                {/* Conditional Settings based on selected tool slug */}
-                <div className="space-y-4">
+                 {/* Conditional Settings based on selected tool slug */}
+                 <div className="space-y-4">
+                  {isPdfPasswordRequired && slug !== "protect-pdf" && (
+                    <div className="space-y-1.5 p-3 border border-red-500/20 bg-red-500/5 rounded-lg mb-4">
+                      <label className="font-mono text-[10px] font-bold text-red-600 uppercase flex items-center gap-1">
+                        <Lock className="h-3 w-3 animate-pulse" />
+                        PDF Password Required
+                      </label>
+                      <input
+                        type="password"
+                        placeholder="Enter PDF password to decrypt"
+                        value={pdfPassword}
+                        onChange={(e) => setPdfPassword(e.target.value)}
+                        className="w-full rounded border border-red-500/30 bg-paper px-2.5 py-1.5 font-sans text-xs text-ink focus:border-red-500 focus:outline-none"
+                      />
+                      <p className="font-mono text-[8px] text-red-500/70">
+                        This document is encrypted. Enter password to view preview and process it.
+                      </p>
+                    </div>
+                  )}
+
                   {slug === "split-pdf" && (
                     <div className="space-y-1.5">
                       <label className="font-mono text-[10px] font-bold text-ink/60 uppercase">
@@ -690,44 +760,88 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
                   )}
 
                   {slug === "rotate-pdf" && (
-                    <div className="space-y-1.5">
-                      <label className="font-mono text-[10px] font-bold text-ink/60 uppercase">
-                        Rotate Degrees
-                      </label>
-                      <div className="grid grid-cols-3 gap-2">
-                        {[90, 180, 270].map((deg) => (
-                          <button
-                            key={deg}
-                            type="button"
-                            onClick={() => setRotation(deg)}
-                            className={`py-1.5 text-xs font-mono border rounded ${
-                              rotation === deg
-                                ? "bg-brand text-white border-brand"
-                                : "bg-paper text-ink border-hairline hover:border-ink/20"
-                            }`}
-                          >
-                            +{deg}°
-                          </button>
-                        ))}
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <label className="font-mono text-[10px] font-bold text-ink/60 uppercase">
+                          Rotate Degrees
+                        </label>
+                        <span className="font-mono text-xs font-bold text-brand bg-brand/5 px-2 py-0.5 rounded">
+                          {rotation}°
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setRotation((prev) => (prev - 90 + 360) % 360)}
+                          className="py-2.5 px-3 border border-hairline bg-paper text-ink hover:border-ink/20 rounded flex items-center justify-center gap-1.5 text-xs font-mono transition-all cursor-pointer hover:shadow-sm active:scale-98"
+                        >
+                          <RotateCcw className="h-4 w-4 shrink-0" />
+                          <span>Rotate Left</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setRotation((prev) => (prev + 90) % 360)}
+                          className="py-2.5 px-3 border border-hairline bg-paper text-ink hover:border-ink/20 rounded flex items-center justify-center gap-1.5 text-xs font-mono transition-all cursor-pointer hover:shadow-sm active:scale-98"
+                        >
+                          <RotateCw className="h-4 w-4 shrink-0" />
+                          <span>Rotate Right</span>
+                        </button>
                       </div>
                     </div>
                   )}
 
                   {slug === "remove-pages" && (
-                    <div className="space-y-1.5">
-                      <label className="font-mono text-[10px] font-bold text-ink/60 uppercase">
-                        Pages to Remove
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g. 2, 4, 11"
-                        value={removePagesRange}
-                        onChange={(e) => setRemovePagesRange(e.target.value)}
-                        className="w-full rounded border border-hairline bg-paper px-2.5 py-1.5 font-mono text-xs text-ink focus:border-brand focus:outline-none"
-                      />
-                      <p className="font-mono text-[9px] text-ink/40">
-                        Comma-separated line indices to exclude.
-                      </p>
+                    <div className="space-y-3">
+                      <div className="space-y-1.5">
+                        <label className="font-mono text-[10px] font-bold text-ink/60 uppercase">
+                          Pages to Remove
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. 2, 4, 11"
+                          value={removePagesRange}
+                          onChange={(e) => setRemovePagesRange(e.target.value)}
+                          className="w-full rounded border border-hairline bg-paper px-2.5 py-1.5 font-mono text-xs text-ink focus:border-brand focus:outline-none"
+                        />
+                        <p className="font-mono text-[9px] text-ink/40">
+                          Comma-separated line indices to exclude.
+                        </p>
+                      </div>
+
+                      {pageCount > 0 && (
+                        <div className="space-y-1.5 pt-2 border-t border-hairline/50">
+                          <label className="font-mono text-[10px] font-bold text-ink/60 uppercase">
+                            Visual Page Selector
+                          </label>
+                          <div className="grid grid-cols-3 gap-1.5 max-h-[160px] overflow-y-auto p-1.5 bg-[#F7F6F3] rounded border border-hairline">
+                            {Array.from({ length: pageCount }, (_, idx) => {
+                              const pageNum = idx + 1;
+                              const isRemoved = getRemovedPages().includes(pageNum);
+                              return (
+                                <button
+                                  key={pageNum}
+                                  type="button"
+                                  onClick={() => togglePageRemoved(pageNum)}
+                                  className={`flex flex-col items-center justify-center py-1.5 px-1 rounded border text-[10px] font-bold transition-all cursor-pointer select-none ${
+                                    isRemoved
+                                      ? "bg-red-500/10 border-red-500/30 text-red-600 hover:bg-red-500/20"
+                                      : "bg-green-500/10 border-green-500/30 text-green-600 hover:bg-green-500/20"
+                                  }`}
+                                >
+                                  <span className="text-[8px] opacity-75 font-mono">Page</span>
+                                  <span className="text-xs font-black">{pageNum}</span>
+                                  <span className="text-[7px] uppercase tracking-wider font-mono opacity-80 mt-0.5">
+                                    {isRemoved ? "Removed" : "Keep"}
+                                  </span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                          <p className="font-mono text-[8px] text-ink/40">
+                            Green = Keep page. Click to turn Red (Remove page).
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -832,6 +946,20 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
                           <option value="center">Centered</option>
                           <option value="left">Left Margin</option>
                           <option value="right">Right Margin</option>
+                        </select>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="font-mono text-[10px] font-bold text-ink/60 uppercase">
+                          Numbering Style
+                        </label>
+                        <select
+                          value={pageNumFormat}
+                          onChange={(e: any) => setPageNumFormat(e.target.value)}
+                          className="w-full rounded border border-hairline bg-paper px-2.5 py-1.5 text-xs text-ink"
+                        >
+                          <option value="page-n-of-total">Page X of Y</option>
+                          <option value="n-of-total">X of Y</option>
+                          <option value="n">X (Number only)</option>
                         </select>
                       </div>
                     </div>
@@ -995,6 +1123,20 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
                       </div>
                       <div className="space-y-1">
                         <label className="font-mono text-[10px] font-bold text-ink/60 uppercase">
+                          Crop Shape
+                        </label>
+                        <select
+                          value={cropShape}
+                          onChange={(e: any) => setCropShape(e.target.value)}
+                          className="w-full rounded border border-hairline bg-paper px-2 py-1 text-xs text-ink"
+                        >
+                          <option value="rect">Rectangle / Square</option>
+                          <option value="circle">Circle / Oval</option>
+                        </select>
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="font-mono text-[10px] font-bold text-ink/60 uppercase">
                           Target Format
                         </label>
                         <select
@@ -1016,7 +1158,46 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
             </div>
             )}
           </div>
-        )}
+
+          {/* Live Preview Panel - Spans full width below files & options cards */}
+          {isMounted && (
+            <div className="border border-hairline rounded-xl bg-white p-5 space-y-3">
+              <h3 className="font-display font-bold text-sm text-ink border-b border-hairline pb-2 flex items-center gap-1.5">
+                <Compass className="h-4 w-4 text-brand animate-pulse-slow" />
+                Live Preview (First Page)
+              </h3>
+              <div className="flex justify-center bg-[#F7F6F3] rounded-lg p-4 border border-hairline overflow-hidden">
+                <PreviewCanvas
+                  file={files[0]}
+                  slug={slug}
+                  rotation={rotation}
+                  watermarkText={watermarkText}
+                  watermarkSize={watermarkSize}
+                  watermarkOpacity={watermarkOpacity}
+                  watermarkColor={watermarkColor}
+                  watermarkPos={watermarkPos}
+                  pageNumPos={pageNumPos}
+                  pageNumAlign={pageNumAlign}
+                  pageNumFormat={pageNumFormat}
+                  cropX={cropX}
+                  cropY={cropY}
+                  cropW={cropW}
+                  cropH={cropH}
+                  cropShape={cropShape}
+                  pdfPassword={pdfPassword}
+                  onPasswordRequired={setIsPdfPasswordRequired}
+                  onCropChange={(c) => {
+                    setCropX(c.x);
+                    setCropY(c.y);
+                    setCropW(c.w);
+                    setCropH(c.h);
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
         {error && (
           <div className="mt-4 flex items-start gap-2.5 rounded-lg border border-red-500/20 bg-red-500/5 p-4 text-sm text-red-600">

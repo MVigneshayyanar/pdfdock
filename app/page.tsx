@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
 import JsonLd from "@/components/JsonLd";
 import { Globe, ShieldCheck, Wifi, Smartphone } from "lucide-react";
+import CameraScanner from "@/components/CameraScanner";
 
 export const metadata: Metadata = {
   title: "PDFDock — Free Private PDF & Image Tools Online",
@@ -112,6 +113,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <CameraScanner />
     </div>
   );
 }

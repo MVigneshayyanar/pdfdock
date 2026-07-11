@@ -11,8 +11,8 @@ let pdfjsLib: any = null;
 const initPdfJs = async () => {
   if (pdfjsLib) return pdfjsLib;
   const pdfjs = await import("pdfjs-dist");
-  // Set worker
-  pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+  // Set worker pointing to npm cdn matching exact version
+  pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
   pdfjsLib = pdfjs;
   return pdfjs;
 };
@@ -223,11 +223,15 @@ export async function imagesToPDF(
  * Convert PDF pages to PNG images
  */
 export async function pdfToImages(
-  file: File
+  file: File,
+  password?: string
 ): Promise<{ name: string; blob: Blob }[]> {
   const pdfjs = await initPdfJs();
   const fileBytes = await file.arrayBuffer();
-  const loadingTask = pdfjs.getDocument({ data: fileBytes });
+  const loadingTask = pdfjs.getDocument({
+    data: fileBytes,
+    password: password || undefined
+  });
   const pdf = await loadingTask.promise;
   const results: { name: string; blob: Blob }[] = [];
 
@@ -354,6 +358,7 @@ export async function addPageNumbers(
   options: {
     position: "top" | "bottom";
     alignment: "left" | "center" | "right";
+    format?: "page-n-of-total" | "n-of-total" | "n";
   }
 ): Promise<Uint8Array> {
   const { PDFDocument, rgb, StandardFonts } = await initPdfLib();
@@ -362,11 +367,19 @@ export async function addPageNumbers(
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const pages = pdfDoc.getPages();
   const total = pages.length;
+  const format = options.format || "page-n-of-total";
 
   for (let i = 0; i < total; i++) {
     const page = pages[i];
     const { width, height } = page.getSize();
-    const text = `Page ${i + 1} of ${total}`;
+    
+    let text = `Page ${i + 1} of ${total}`;
+    if (format === "n-of-total") {
+      text = `${i + 1} of ${total}`;
+    } else if (format === "n") {
+      text = `${i + 1}`;
+    }
+
     const size = 9;
     const textWidth = font.widthOfTextAtSize(text, size);
 
@@ -415,12 +428,16 @@ export async function protectPDF(
 export async function compressPDF(
   file: File,
   scale = 1.0,
-  quality = 0.5
+  quality = 0.5,
+  password?: string
 ): Promise<Uint8Array> {
   const { PDFDocument } = await initPdfLib();
   const pdfjs = await initPdfJs();
   const fileBytes = await file.arrayBuffer();
-  const loadingTask = pdfjs.getDocument({ data: fileBytes });
+  const loadingTask = pdfjs.getDocument({
+    data: fileBytes,
+    password: password || undefined
+  });
   const pdf = await loadingTask.promise;
 
   const compressedPdf = await PDFDocument.create();

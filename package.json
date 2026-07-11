@@ -12,6 +12,7 @@
     "@pdfsmaller/pdf-encrypt-lite": "^1.0.2",
     "browser-image-compression": "^2.0.2",
     "file-saver": "^2.0.5",
+    "jscanify": "^1.4.2",
     "jszip": "^3.10.1",
     "lucide-react": "^1.24.0",
     "next": "16.2.10",

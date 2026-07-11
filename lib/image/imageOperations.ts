@@ -52,7 +52,8 @@ export async function convertImage(
 export async function cropImage(
   file: File,
   cropRect: { x: number; y: number; width: number; height: number },
-  format = "image/jpeg"
+  format = "image/jpeg",
+  cropShape = "rect"
 ): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -68,6 +69,16 @@ export async function cropImage(
         return;
       }
 
+      // Apply circular crop mask if selected
+      if (cropShape === "circle") {
+        ctx.beginPath();
+        const cx = cropRect.width / 2;
+        const cy = cropRect.height / 2;
+        const r = Math.min(cropRect.width, cropRect.height) / 2;
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.clip();
+      }
+
       ctx.drawImage(
         img,
         cropRect.x,
@@ -80,13 +91,16 @@ export async function cropImage(
         cropRect.height
       );
 
+      // Force PNG output if circular crop is selected to preserve alpha channel transparency
+      const finalFormat = cropShape === "circle" ? "image/png" : format;
+
       canvas.toBlob(
         (blob) => {
           URL.revokeObjectURL(img.src);
           if (blob) resolve(blob);
           else reject(new Error("Cropping canvas compilation empty."));
         },
-        format,
+        finalFormat,
         0.9
       );
     };
