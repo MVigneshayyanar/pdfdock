@@ -206,6 +206,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
     newSize: number;
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Settings states based on selected tool
   const [splitRange, setSplitRange] = useState("all");
@@ -240,18 +241,24 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
   const [fileRotations, setFileRotations] = useState<number[]>([]);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
     if (!config) {
       router.push("/");
     }
   }, [config, router]);
 
   useEffect(() => {
-    try {
-      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-    } catch (e) {
-      // Silently catch ad blocker errors
+    if (isMounted) {
+      try {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      } catch (e) {
+        // Silently catch ad blocker errors
+      }
     }
-  }, [slug]);
+  }, [slug, isMounted]);
 
   // Adjust aspect ratio locks
   const handleWidthChange = (val: number) => {
@@ -1020,15 +1027,17 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
       </div>
 
       {/* Google AdSense Responsive Banner */}
-      <div className="w-full my-4 flex justify-center bg-white border border-hairline rounded-xl p-4 shadow-sm min-h-[100px] overflow-hidden">
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block", width: "100%" }}
-          data-ad-client="ca-pub-8331123038839031"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-      </div>
+      {isMounted && (
+        <div className="w-full my-4 flex justify-center bg-white border border-hairline rounded-xl p-4 shadow-sm min-h-[100px] overflow-hidden">
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block", width: "100%" }}
+            data-ad-client="ca-pub-8331123038839031"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+        </div>
+      )}
 
       {/* Scaffolded SEO Article, How-To & FAQ Section */}
       {(() => {
