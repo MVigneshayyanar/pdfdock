@@ -291,7 +291,7 @@ export default function HomeClient() {
           }
 
           return (
-            <Link href={`/tools/${tool.slug}`} key={tool.slug} className="block no-underline">
+            <Link href={`/tools/${tool.slug}/`} key={tool.slug} className="block no-underline">
               {CardContent}
             </Link>
           );

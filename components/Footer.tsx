@@ -36,7 +36,7 @@ export default function Footer() {
               {PDF_TOOLS.slice(0, 5).map((tool) => (
                 <li key={tool.slug}>
                   <Link
-                    href={`/tools/${tool.slug}`}
+                    href={`/tools/${tool.slug}/`}
                     className="font-sans text-xs text-ink/60 hover:text-brand transition-colors"
                   >
                     {tool.name}
@@ -54,7 +54,7 @@ export default function Footer() {
               {PDF_TOOLS.slice(5).map((tool) => (
                 <li key={tool.slug}>
                   <Link
-                    href={`/tools/${tool.slug}`}
+                    href={`/tools/${tool.slug}/`}
                     className="font-sans text-xs text-ink/60 hover:text-brand transition-colors"
                   >
                     {tool.name}
@@ -72,7 +72,7 @@ export default function Footer() {
               {IMAGE_TOOLS.map((tool) => (
                 <li key={tool.slug}>
                   <Link
-                    href={`/tools/${tool.slug}`}
+                    href={`/tools/${tool.slug}/`}
                     className="font-sans text-xs text-ink/60 hover:text-brand transition-colors"
                   >
                     {tool.name}

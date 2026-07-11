@@ -33,14 +33,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const tools = allSlugs.map((slug) => ({
-    url: `${baseUrl}/tools/${slug}`,
+    url: `${baseUrl}/tools/${slug}/`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: highPriority.includes(slug) ? 0.9 : 0.7,
     alternates: {
       languages: {
-        "x-default": `${baseUrl}/tools/${slug}`,
-        "en": `${baseUrl}/tools/${slug}`,
+        "x-default": `${baseUrl}/tools/${slug}/`,
+        "en": `${baseUrl}/tools/${slug}/`,
       }
     }
   }));

@@ -43,12 +43,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: seo.title,
     description: seo.description,
     alternates: {
-      canonical: `/tools/${slug}`,
+      canonical: `/tools/${slug}/`,
     },
     openGraph: {
       title: seo.title,
       description: seo.description,
-      url: `https://pdfdock.tech/tools/${slug}`,
+      url: `https://pdfdock.tech/tools/${slug}/`,
       type: "website",
       images: [{ url: "/og-image.png", width: 1200, height: 630, alt: seo.h1 }],
     },
@@ -73,7 +73,7 @@ export default function Page({ params }: PageProps) {
   const breadcrumbs = {
     items: [
       { name: "Home", url: "https://pdfdock.tech" },
-      { name: seo.h1, url: `https://pdfdock.tech/tools/${slug}` }
+      { name: seo.h1, url: `https://pdfdock.tech/tools/${slug}/` }
     ]
   };
 
@@ -85,7 +85,7 @@ export default function Page({ params }: PageProps) {
 
   const webPageData = {
     name: seo.h1,
-    url: `https://pdfdock.tech/tools/${slug}`,
+    url: `https://pdfdock.tech/tools/${slug}/`,
     description: seo.description,
     isPartOf: "https://pdfdock.tech"
   };

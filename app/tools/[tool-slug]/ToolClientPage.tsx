@@ -1086,7 +1086,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
                     return (
                       <Link
                         key={rt.slug}
-                        href={`/tools/${rt.slug}`}
+                        href={`/tools/${rt.slug}/`}
                         className="group flex items-start gap-3 border border-hairline rounded-xl p-4 bg-white hover:border-brand/30 hover:shadow-sm transition-all no-underline"
                       >
                         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand/5 text-brand">
