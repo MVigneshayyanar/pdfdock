@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-paper: #F7F6F3;
+  --color-ink: #1B1B1F;
+  --color-brand: #2454FF;
+  --color-stamp: #FF4D2E;
+  --color-hairline: #DCDAD2;
+
+  --font-sans: var(--font-inter), sans-serif;
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), monospace;
+  
+  --animate-stamp: stamp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes stamp {
+  0% {
+    opacity: 0;
+    transform: scale(3) rotate(-15deg);
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(0.9) rotate(-12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-8deg);
+    filter: blur(0);
   }
 }
 
+/* Custom base styles */
+:root {
+  --background: #F7F6F3;
+  --foreground: #1B1B1F;
+}
+
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Subtly pattern background */
+.paper-texture {
+  background-image: 
+    radial-gradient(#1b1b1f 0.5px, transparent 0.5px), 
+    radial-gradient(#1b1b1f 0.5px, #f7f6f3 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  opacity: 0.02;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F6F3;
+}
+::-webkit-scrollbar-thumb {
+  background: #DCDAD2;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1B1B1F;
+}
+
+/* Stamp effect styling */
+.stamp-text {
+  font-family: var(--font-space-grotesk);
+  border: 4px double #FF4D2E;
+  color: #FF4D2E;
+  background: rgba(255, 77, 46, 0.05);
+  text-shadow: 0 0 2px rgba(255, 77, 46, 0.2);
 }
