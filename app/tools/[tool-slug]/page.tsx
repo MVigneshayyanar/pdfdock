@@ -22,6 +22,11 @@ export function generateStaticParams() {
     "resize-image",
     "convert-image",
     "crop-image",
+    // Coming soon slugs to prevent 404s
+    "pdf-to-word",
+    "pdf-to-excel",
+    "pdf-to-ppt",
+    "ocr-scanner",
   ];
   return slugs.map((slug) => ({
     "tool-slug": slug,
