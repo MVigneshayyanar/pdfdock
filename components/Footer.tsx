@@ -81,31 +81,39 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          {/* About / Trust Column */}
+          {/* About & Legal Column */}
           <div>
             <h4 className="font-display font-bold text-xs text-ink mb-3 uppercase tracking-wider">
-              About PDFDock
+              About & Legal
             </h4>
             <ul className="space-y-2">
-              <li className="flex items-center gap-1.5">
-                <Shield className="h-3 w-3 text-brand shrink-0" />
-                <span className="font-sans text-xs text-ink/60">100% Private</span>
+              <li>
+                <Link
+                  href="/about/"
+                  className="font-sans text-xs text-ink/60 hover:text-brand transition-colors"
+                >
+                  About & Contact
+                </Link>
               </li>
-              <li className="flex items-center gap-1.5">
-                <Shield className="h-3 w-3 text-brand shrink-0" />
-                <span className="font-sans text-xs text-ink/60">No File Uploads</span>
+              <li>
+                <Link
+                  href="/privacy/"
+                  className="font-sans text-xs text-ink/60 hover:text-brand transition-colors"
+                >
+                  Privacy Policy
+                </Link>
               </li>
-              <li className="flex items-center gap-1.5">
-                <Shield className="h-3 w-3 text-brand shrink-0" />
-                <span className="font-sans text-xs text-ink/60">GDPR Compliant</span>
+              <li>
+                <Link
+                  href="/terms/"
+                  className="font-sans text-xs text-ink/60 hover:text-brand transition-colors"
+                >
+                  Terms of Service
+                </Link>
               </li>
-              <li className="flex items-center gap-1.5">
+              <li className="pt-2 border-t border-hairline flex items-center gap-1.5">
                 <Shield className="h-3 w-3 text-brand shrink-0" />
-                <span className="font-sans text-xs text-ink/60">Works Worldwide</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <Shield className="h-3 w-3 text-brand shrink-0" />
-                <span className="font-sans text-xs text-ink/60">All Devices</span>
+                <span className="font-sans text-[10px] text-ink/50">100% Private (Local)</span>
               </li>
             </ul>
           </div>
