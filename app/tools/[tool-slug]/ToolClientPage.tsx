@@ -1267,6 +1267,38 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
             </section>
 
             {/* Related Tools Cross-Link Grid */}
+            {/* Competitor Comparison Section — Ranks for "ilovepdf alternative" searches */}
+            {seo.comparison && (
+              <section className="space-y-4">
+                <h2 className="font-display text-lg font-bold">
+                  {seo.comparison.heading}
+                </h2>
+                <p className="font-sans text-xs sm:text-sm text-ink/75 leading-relaxed max-w-3xl">
+                  {seo.comparison.intro}
+                </p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-[11px] sm:text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-ink text-paper">
+                        <th className="text-left py-2.5 px-3 sm:px-4 font-display font-bold rounded-tl-lg">Feature</th>
+                        <th className="text-center py-2.5 px-3 sm:px-4 font-display font-bold text-brand bg-brand/10">PDFDock</th>
+                        <th className="text-center py-2.5 px-3 sm:px-4 font-display font-bold rounded-tr-lg">Others</th>
+                      </tr>
+                    </thead>
+                    <tbody className="font-sans">
+                      {seo.comparison.features.map((row: { feature: string; pdfdock: string; others: string }, i: number) => (
+                        <tr key={i} className={`border-b border-hairline ${i % 2 === 1 ? 'bg-white/50' : ''}`}>
+                          <td className="py-2 px-3 sm:px-4 font-semibold text-ink">{row.feature}</td>
+                          <td className="py-2 px-3 sm:px-4 text-center text-green-600 font-bold">{row.pdfdock}</td>
+                          <td className="py-2 px-3 sm:px-4 text-center text-ink/60">{row.others}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            )}
+
             {relatedTools.length > 0 && (
               <section className="space-y-4">
                 <h2 className="font-display text-lg font-bold">

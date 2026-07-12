@@ -44,10 +44,14 @@ interface WebPageData {
   isPartOf: string; // parent WebSite URL
 }
 
+interface ItemListData {
+  items: { name: string; url: string; description: string; position: number }[];
+}
+
 // --- Union type ---
 
-type JsonLdType = "SoftwareApplication" | "FAQPage" | "HowTo" | "Breadcrumb" | "WebSite" | "Organization" | "WebPage";
-type JsonLdData = SoftwareApplicationData | FAQPageData | HowToData | BreadcrumbData | WebSiteData | OrganizationData | WebPageData;
+type JsonLdType = "SoftwareApplication" | "FAQPage" | "HowTo" | "Breadcrumb" | "WebSite" | "Organization" | "WebPage" | "ItemList";
+type JsonLdData = SoftwareApplicationData | FAQPageData | HowToData | BreadcrumbData | WebSiteData | OrganizationData | WebPageData | ItemListData;
 
 interface JsonLdProps {
   type: JsonLdType;
@@ -168,6 +172,19 @@ export default function JsonLd({ type, data }: JsonLdProps) {
         "url": d.isPartOf
       },
       "inLanguage": "en"
+    };
+  } else if (type === "ItemList") {
+    const d = data as ItemListData;
+    schema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": d.items.map((item) => ({
+        "@type": "ListItem",
+        "position": item.position,
+        "name": item.name,
+        "url": item.url,
+        "description": item.description,
+      }))
     };
   }
 
