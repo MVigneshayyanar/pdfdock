@@ -11,7 +11,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/_next/", "/api/"],
       },
     ],
-    sitemap: "https://pdfdock.tech/sitemap.xml",
-    host: "https://pdfdock.tech",
+    sitemap: "https://www.pdfdock.tech/sitemap.xml",
+    host: "https://www.pdfdock.tech",
   };
 }

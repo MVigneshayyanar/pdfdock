@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "PDFDock — Free Private PDF & Image Tools Online",
     description: "Merge, split, compress, protect, watermark, resize, crop, and convert files — 100% private, no upload. The best free alternative to iLovePDF and SmallPDF.",
-    url: "https://pdfdock.tech",
+    url: "https://www.pdfdock.tech",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "PDFDock — Free PDF & Image Tools" }],
   },
@@ -50,36 +50,36 @@ export default function Home() {
       {/* Structured Data — SoftwareApplication */}
       <JsonLd type="SoftwareApplication" data={{
         name: "PDFDock",
-        url: "https://pdfdock.tech",
+        url: "https://www.pdfdock.tech",
         description: "Free online PDF and image tools. Merge, split, compress, rotate, protect, watermark, resize, crop, and convert files — 100% private, no upload required. The best free alternative to iLovePDF and SmallPDF."
       }} />
 
       {/* Structured Data — WebSite with SearchAction for sitelinks */}
       <JsonLd type="WebSite" data={{
         name: "PDFDock",
-        url: "https://pdfdock.tech",
+        url: "https://www.pdfdock.tech",
         description: "Free private PDF and image tools running 100% in your browser. The most private alternative to iLovePDF, SmallPDF, and Adobe Acrobat online.",
       }} />
 
       {/* Structured Data — Organization for knowledge panel */}
       <JsonLd type="Organization" data={{
         name: "PDFDock",
-        url: "https://pdfdock.tech",
-        logo: "https://pdfdock.tech/apple-touch-icon.png",
+        url: "https://www.pdfdock.tech",
+        logo: "https://www.pdfdock.tech/apple-touch-icon.png",
         description: "PDFDock provides free, private, browser-based PDF and image processing tools that work on any device worldwide. The most private alternative to iLovePDF, SmallPDF, and Adobe Acrobat.",
         sameAs: [],  // Add social profile URLs when available: Twitter, GitHub, LinkedIn
       }} />
 
       {/* Structured Data — Breadcrumb */}
       <JsonLd type="Breadcrumb" data={{
-        items: [{ name: "Home", url: "https://pdfdock.tech" }]
+        items: [{ name: "Home", url: "https://www.pdfdock.tech" }]
       }} />
 
       {/* Structured Data — ItemList for sitelinks */}
       <JsonLd type="ItemList" data={{
         items: ALL_TOOLS_SEO.map((tool, index) => ({
           name: tool.name,
-          url: `https://pdfdock.tech/tools/${tool.slug}/`,
+          url: `https://www.pdfdock.tech/tools/${tool.slug}/`,
           description: tool.desc,
           position: index + 1,
         }))

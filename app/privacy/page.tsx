@@ -30,7 +30,7 @@ export default function PrivacyPage() {
       {/* Body Copy */}
       <div className="font-sans text-xs sm:text-sm text-ink/80 leading-relaxed space-y-6">
         <p>
-          At PDFDock (accessible from <Link href="/" className="text-brand font-semibold hover:underline">https://pdfdock.tech</Link>), one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information that is collected and recorded by PDFDock and how we use it.
+          At PDFDock (accessible from <Link href="/" className="text-brand font-semibold hover:underline">https://www.pdfdock.tech</Link>), one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information that is collected and recorded by PDFDock and how we use it.
         </p>
         <p>
           If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us through the Vigneshayyanar contact form at <a href="https://vigneshayyanar.netlify.app/contact" target="_blank" rel="noopener noreferrer" className="text-brand font-semibold hover:underline">https://vigneshayyanar.netlify.app/contact</a>.
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="font-display text-lg font-bold text-ink">2. Google DoubleClick DART Cookie</h2>
           <p>
-            Google is one of the third-party vendors on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to <code>https://pdfdock.tech</code> and other sites on the internet. 
+            Google is one of the third-party vendors on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to <code>https://www.pdfdock.tech</code> and other sites on the internet. 
           </p>
           <p>
             However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-brand hover:underline font-semibold">https://policies.google.com/technologies/ads</a>.

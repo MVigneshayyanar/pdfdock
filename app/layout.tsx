@@ -23,7 +23,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pdfdock.tech"),
+  metadataBase: new URL("https://www.pdfdock.tech"),
   manifest: "/manifest.json",
   title: {
     default: "PDFDock — Free Private PDF & Image Tools Online",
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     languages: {
-      "x-default": "https://pdfdock.tech",
-      "en": "https://pdfdock.tech",
+      "x-default": "https://www.pdfdock.tech",
+      "en": "https://www.pdfdock.tech",
     }
   },
   icons: {
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "PDFDock — Free Private PDF & Image Tools Online",
     description: "Merge, split, compress, protect, watermark, resize, crop, and convert files — 100% private, no upload. Works worldwide.",
-    url: "https://pdfdock.tech",
+    url: "https://www.pdfdock.tech",
     siteName: "PDFDock",
     locale: "en_US",
     type: "website",

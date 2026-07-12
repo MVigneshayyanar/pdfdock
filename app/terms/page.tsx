@@ -30,7 +30,7 @@ export default function TermsPage() {
       {/* Body Copy */}
       <div className="font-sans text-xs sm:text-sm text-ink/80 leading-relaxed space-y-6">
         <p>
-          Welcome to PDFDock! These Terms of Service ("Terms") govern your use of our website located at <Link href="/" className="text-brand font-semibold hover:underline">https://pdfdock.tech</Link> (the "Service"), operated by PDFDock.
+          Welcome to PDFDock! These Terms of Service ("Terms") govern your use of our website located at <Link href="/" className="text-brand font-semibold hover:underline">https://www.pdfdock.tech</Link> (the "Service"), operated by PDFDock.
         </p>
         <p>
           By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part of the terms, you may not access the Service.

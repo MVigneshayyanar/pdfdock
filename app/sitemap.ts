@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://pdfdock.tech";
+  const baseUrl = "https://www.pdfdock.tech";
 
   // High-traffic tools get higher priority for search engine crawl budget
   const highPriority = [
