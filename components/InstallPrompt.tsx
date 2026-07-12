@@ -14,6 +14,11 @@ export default function InstallPrompt() {
       return;
     }
 
+    // Check if user previously dismissed the prompt
+    if (localStorage.getItem("installPromptDismissed") === "true") {
+      return;
+    }
+
     // Detect iOS
     const userAgent = window.navigator.userAgent.toLowerCase();
     const isIosDevice = /iphone|ipad|ipod/.test(userAgent);
@@ -51,6 +56,7 @@ export default function InstallPrompt() {
   };
 
   const handleClose = () => {
+    localStorage.setItem("installPromptDismissed", "true");
     setShowPrompt(false);
   };
 

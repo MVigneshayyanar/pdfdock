@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -97,10 +98,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-        <script
+        <Script
+          id="adsense"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8331123038839031"
           crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#F7F6F3] text-[#1B1B1F] font-sans selection:bg-[#2454FF] selection:text-white">
@@ -114,7 +117,9 @@ export default function RootLayout({
         </main>
         <Footer />
         <InstallPrompt />
-        <script
+        <Script
+          id="sw-register"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               if ('serviceWorker' in navigator) {

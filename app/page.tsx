@@ -3,6 +3,7 @@ import HomeClient from "@/components/HomeClient";
 import JsonLd from "@/components/JsonLd";
 import { Globe, ShieldCheck, Wifi, Smartphone } from "lucide-react";
 import CameraScanner from "@/components/CameraScanner";
+import AdBanner from "@/components/AdBanner";
 
 export const metadata: Metadata = {
   title: "PDFDock — Free Private PDF & Image Tools Online",
@@ -68,6 +69,8 @@ export default function Home() {
 
       {/* Category Tabs and Tool Grid */}
       <HomeClient />
+
+      <AdBanner />
 
       {/* Why PDFDock? — Trust signals section for SEO and conversion */}
       <section className="border-t border-hairline pt-6 sm:pt-8">

@@ -47,6 +47,7 @@ import {
 } from "@/lib/image/imageOperations";
 import { SEO_REGISTRY } from "@/lib/seo/seoMetadata";
 import { TOOLS } from "@/components/HomeClient";
+import AdBanner from "@/components/AdBanner";
 
 interface ToolConfig {
   slug: string;
@@ -257,15 +258,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
     }
   }, [config, router]);
 
-  useEffect(() => {
-    if (isMounted) {
-      try {
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-      } catch (e) {
-        // Silently catch ad blocker errors
-      }
-    }
-  }, [slug, isMounted]);
+
 
   useEffect(() => {
     if (slug === "remove-pages" && files.length > 0) {
@@ -1208,17 +1201,7 @@ export default function ToolClientPage({ params }: { params: Promise<{ "tool-slu
       </div>
 
       {/* Google AdSense Responsive Banner */}
-      {isMounted && (
-        <div className="w-full my-4 flex justify-center overflow-hidden">
-          <ins
-            className="adsbygoogle"
-            style={{ display: "block", width: "100%" }}
-            data-ad-client="ca-pub-8331123038839031"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-        </div>
-      )}
+      {isMounted && <AdBanner />}
 
       {/* Scaffolded SEO Article, How-To & FAQ Section */}
       {(() => {
