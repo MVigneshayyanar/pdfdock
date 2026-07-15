@@ -130,6 +130,33 @@ export default function RootLayout({
             `,
           }}
         />
+        <Script
+          id="chunk-error-recovery"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                var RELOAD_KEY = 'pdfdock-chunk-reload';
+                function isChunkError(message) {
+                  return /ChunkLoadError|Loading chunk|Loading CSS chunk|Importing a module script failed|dynamically imported module/i.test(message || '');
+                }
+                function recover() {
+                  if (sessionStorage.getItem(RELOAD_KEY)) return;
+                  sessionStorage.setItem(RELOAD_KEY, '1');
+                  window.location.reload();
+                }
+                window.addEventListener('error', function (event) {
+                  if (isChunkError(event && event.message)) recover();
+                });
+                window.addEventListener('unhandledrejection', function (event) {
+                  var reason = event && event.reason;
+                  var message = reason && (reason.message || String(reason));
+                  if (isChunkError(message)) recover();
+                });
+              })();
+            `,
+          }}
+        />
       </body>
     </html>
   );
