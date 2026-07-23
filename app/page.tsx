@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
 import JsonLd from "@/components/JsonLd";
-import { Globe, ShieldCheck, Wifi, Smartphone } from "lucide-react";
-import CameraScanner from "@/components/CameraScanner";
+import { Globe, ShieldCheck, Wifi, Smartphone, Lock, Cpu, ArrowRight } from "lucide-react";
 import AdBanner from "@/components/AdBanner";
 import Link from "next/link";
 
@@ -44,9 +43,32 @@ const ALL_TOOLS_SEO = [
   { name: "Add Page Numbers", slug: "add-page-numbers", desc: "Insert automatic 'Page X of N' numbers in header or footer." },
 ];
 
+const HOMEPAGE_FAQS = [
+  {
+    q: "Is PDFDock 100% free with no file limits?",
+    a: "Yes. PDFDock is completely free to use without daily task caps, file count restrictions, or paywalls. You can process as many PDF and image files as your browser memory can handle."
+  },
+  {
+    q: "How does PDFDock protect my document privacy?",
+    a: "Unlike traditional online PDF tools (such as iLovePDF or SmallPDF) that upload your files to third-party cloud servers, PDFDock executes all parsing, rendering, merging, and compression locally inside your web browser's RAM memory. Your files never touch external servers."
+  },
+  {
+    q: "Can I use PDFDock offline?",
+    a: "Yes. Once the web application loads in your browser tab, all calculation engines run offline. You can edit documents without an active Wi-Fi or cellular connection."
+  },
+  {
+    q: "Are PDFDock tools compliant with GDPR, CCPA, and HIPAA privacy rules?",
+    a: "Yes. Because PDFDock processes files locally and never transmits or stores user documents on servers, data privacy regulations like GDPR, CCPA, and HIPAA are inherently satisfied."
+  },
+  {
+    q: "What devices and browsers are supported?",
+    a: "PDFDock works seamlessly across all operating systems—including Windows, macOS, Linux, ChromeOS, iOS, and Android—in Chrome, Safari, Firefox, and Edge browsers."
+  }
+];
+
 export default function Home() {
   return (
-    <div className="mx-auto max-w-7xl px-4 pt-4 pb-2 sm:pt-6 sm:pb-3 flex flex-col space-y-4 sm:space-y-6">
+    <div className="mx-auto max-w-7xl px-4 pt-4 pb-2 sm:pt-6 sm:pb-3 flex flex-col space-y-6 sm:space-y-8">
       {/* Structured Data — SoftwareApplication */}
       <JsonLd type="SoftwareApplication" data={{
         name: "PDFDock",
@@ -61,13 +83,12 @@ export default function Home() {
         description: "Free private PDF and image tools running 100% in your browser. The most private alternative to iLovePDF, SmallPDF, and Adobe Acrobat online.",
       }} />
 
-      {/* Structured Data — Organization for knowledge panel */}
+      {/* Structured Data — Organization */}
       <JsonLd type="Organization" data={{
         name: "PDFDock",
         url: "https://www.pdfdock.tech",
         logo: "https://www.pdfdock.tech/apple-touch-icon.png",
-        description: "PDFDock provides free, private, browser-based PDF and image processing tools that work on any device worldwide. The most private alternative to iLovePDF, SmallPDF, and Adobe Acrobat.",
-        sameAs: [],  // Add social profile URLs when available: Twitter, GitHub, LinkedIn
+        description: "PDFDock provides free, private, browser-based PDF and image processing tools that work on any device worldwide.",
       }} />
 
       {/* Structured Data — Breadcrumb */}
@@ -85,7 +106,10 @@ export default function Home() {
         }))
       }} />
 
-      {/* Hero Section — Globally optimized H1 */}
+      {/* Structured Data — FAQPage */}
+      <JsonLd type="FAQPage" data={{ faqs: HOMEPAGE_FAQS }} />
+
+      {/* Hero Section */}
       <header className="text-center max-w-2xl mx-auto space-y-2">
         <h1 className="font-display text-lg sm:text-xl md:text-2xl font-black tracking-tight text-ink leading-tight">
           Free Online PDF & Image Tools — 100% Private, No Upload
@@ -100,7 +124,7 @@ export default function Home() {
 
       <AdBanner />
 
-      {/* Why PDFDock? — Trust signals section for SEO and conversion */}
+      {/* Trust signals section */}
       <section className="border-t border-hairline pt-6 sm:pt-8">
         <h2 className="font-display text-base sm:text-lg font-bold text-ink text-center mb-5">
           Why millions choose PDFDock worldwide
@@ -145,7 +169,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Competitor Comparison — SEO section for ranking against iLovePDF, SmallPDF */}
+      {/* Technical Architecture Highlight Box */}
+      <section className="border border-hairline bg-brand/5 rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2 text-brand font-mono text-[10px] font-bold uppercase tracking-wider">
+            <Cpu className="h-4 w-4" />
+            Zero Server Upload Technology
+          </div>
+          <h3 className="font-display text-sm sm:text-base font-bold text-ink">
+            How Client-Side PDF Processing Protects Your Data
+          </h3>
+          <p className="font-sans text-xs text-ink/70 max-w-xl leading-relaxed">
+            Read our deep technical guide on how PDFDock uses WebAssembly and local JavaScript memory buffers to manipulate PDF and image files without sending data across the internet.
+          </p>
+        </div>
+        <Link
+          href="/how-it-works/"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-4 py-2.5 text-xs font-bold text-white hover:bg-brand/90 transition-all shrink-0 cursor-pointer shadow-xs"
+        >
+          Read Security Guide
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </section>
+
+      {/* Competitor Comparison */}
       <section className="border-t border-hairline pt-6 sm:pt-8">
         <h2 className="font-display text-base sm:text-lg font-bold text-ink text-center mb-2">
           The Private Alternative to iLovePDF, SmallPDF & Adobe Acrobat
@@ -211,7 +258,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* All Tools SEO Section — Crawlable text for Google */}
+      {/* Homepage FAQ Section */}
+      <section className="border-t border-hairline pt-6 sm:pt-8 space-y-4">
+        <h2 className="font-display text-base sm:text-lg font-bold text-ink text-center mb-2">
+          Frequently Asked Questions About PDFDock
+        </h2>
+        <div className="max-w-3xl mx-auto space-y-3">
+          {HOMEPAGE_FAQS.map((faq, index) => (
+            <details key={index} className="group border border-hairline rounded-xl bg-white overflow-hidden">
+              <summary className="flex items-center justify-between cursor-pointer px-4 py-3.5 font-display text-xs sm:text-sm font-bold text-ink hover:bg-ink/[0.02] transition-colors">
+                <span>{faq.q}</span>
+                <span className="text-ink/40 group-open:rotate-180 transition-transform text-sm ml-2 shrink-0">▼</span>
+              </summary>
+              <div className="px-4 pb-3.5 pt-0.5">
+                <p className="font-sans text-xs text-ink/70 leading-relaxed">
+                  {faq.a}
+                </p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* All Tools Directory Grid */}
       <section className="border-t border-hairline pt-6 sm:pt-8">
         <h2 className="font-display text-base sm:text-lg font-bold text-ink text-center mb-2">
           All Free PDF & Image Tools
@@ -240,7 +309,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SEO Bottom Content — Long-tail keyword targeting */}
+      {/* SEO Bottom Content */}
       <section className="border-t border-hairline pt-6 sm:pt-8 pb-4">
         <h2 className="font-display text-base sm:text-lg font-bold text-ink text-center mb-3">
           Free PDF Tools Online — No Upload, No Signup
@@ -260,8 +329,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-
-      {/* <CameraScanner /> */}
     </div>
   );
 }

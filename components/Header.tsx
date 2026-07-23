@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShieldCheck, FileText } from "lucide-react";
+import { ShieldCheck, Info, HelpCircle } from "lucide-react";
 
 export default function Header() {
   return (
@@ -21,12 +21,27 @@ export default function Header() {
           </div>
         </Link>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/5 px-3 py-1 font-mono text-xs font-medium text-green-600 dark:text-green-500">
-            <ShieldCheck className="h-4.5 w-4.5 animate-pulse-slow text-green-500" />
-            <span className="hidden sm:inline">100% Local:</span> Secure Client-Side
+        <nav className="flex items-center gap-3 sm:gap-5" aria-label="Main Header Navigation">
+          <Link
+            href="/how-it-works/"
+            className="hidden md:inline-flex items-center gap-1 font-mono text-xs font-semibold text-ink/70 hover:text-brand transition-colors"
+          >
+            <HelpCircle className="h-3.5 w-3.5" />
+            How It Works
+          </Link>
+          <Link
+            href="/about/"
+            className="hidden md:inline-flex items-center gap-1 font-mono text-xs font-semibold text-ink/70 hover:text-brand transition-colors"
+          >
+            <Info className="h-3.5 w-3.5" />
+            About
+          </Link>
+
+          <div className="flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/5 px-3 py-1 font-mono text-xs font-medium text-green-600">
+            <ShieldCheck className="h-4 w-4 animate-pulse-slow text-green-600" />
+            <span className="hidden sm:inline">100% Local:</span> Private Browser Engine
           </div>
-        </div>
+        </nav>
       </div>
     </header>
   );

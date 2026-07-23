@@ -45,12 +45,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }));
 
-  const legalSlugs = ["privacy", "terms", "about"];
-  const legalPages = legalSlugs.map((slug) => ({
+  const informationalSlugs = ["privacy", "terms", "about", "how-it-works"];
+  const informationalPages = informationalSlugs.map((slug) => ({
     url: `${baseUrl}/${slug}/`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: 0.3,
+    priority: slug === "how-it-works" ? 0.8 : 0.4,
     alternates: {
       languages: {
         "x-default": `${baseUrl}/${slug}/`,
@@ -73,6 +73,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }
     },
     ...tools,
-    ...legalPages,
+    ...informationalPages,
   ];
 }

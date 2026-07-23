@@ -84,9 +84,17 @@ export default function Footer() {
           {/* About & Legal Column */}
           <div>
             <h4 className="font-display font-bold text-xs text-ink mb-3 uppercase tracking-wider">
-              About & Legal
+              About & Security
             </h4>
             <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/how-it-works/"
+                  className="font-sans text-xs text-ink/60 hover:text-brand transition-colors font-semibold"
+                >
+                  How It Works (Security)
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/about/"
@@ -113,7 +121,7 @@ export default function Footer() {
               </li>
               <li className="pt-2 border-t border-hairline flex items-center gap-1.5">
                 <Shield className="h-3 w-3 text-brand shrink-0" />
-                <span className="font-sans text-[10px] text-ink/50">100% Private (Local)</span>
+                <span className="font-sans text-[10px] text-ink/50">100% Private (Client RAM)</span>
               </li>
             </ul>
           </div>

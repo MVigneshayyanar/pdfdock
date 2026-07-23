@@ -8,8 +8,8 @@ export interface ToolSeo {
   steps: string[];
   faqs: { q: string; a: string }[];
   comparison: {
-    heading: string;       // e.g. "Why Choose PDFDock Over iLovePDF & SmallPDF?"
-    intro: string;         // paragraph explaining the comparison
+    heading: string;
+    intro: string;
     features: {
       feature: string;
       pdfdock: string;
@@ -23,706 +23,582 @@ export const SEO_REGISTRY: Record<string, ToolSeo> = {
     title: "Images to PDF — Convert JPG, PNG to PDF Free Online",
     description: "Convert JPG, PNG, WebP images to PDF free. No upload, no signup, 100% private. Best iLovePDF & SmallPDF alternative. Works on any device worldwide.",
     h1: "Convert Images to PDF Online",
-    intro: "Turn any combination of JPG, PNG, or WebP images into a clean, formatted PDF document. PDFDock processes everything inside your browser — your files never touch a server. Works on Windows, Mac, Linux, Android, and iOS. No account needed, no file size limits, and fully GDPR-compliant. Unlike iLovePDF or SmallPDF, PDFDock never uploads your files — everything stays 100% private on your device.",
-    keywords: ["images to pdf", "jpg to pdf", "png to pdf", "photo to pdf", "convert image to pdf", "picture to pdf", "img to pdf", "image to pdf converter", "jpg to pdf converter free", "convert photos to pdf on phone", "ilovepdf alternative", "smallpdf alternative", "free pdf converter no upload", "convert multiple images to pdf"],
-    relatedSlugs: ["merge-pdf", "compress-pdf", "pdf-to-images"],
+    intro: "Turn any combination of JPG, PNG, or WebP images into a clean, single PDF document in seconds. PDFDock processes every image entirely inside your browser's local memory buffer using WebAssembly and client-side JavaScript. Unlike cloud-based file tools such as iLovePDF or SmallPDF, your photos are never uploaded to remote servers or cloud storage. This makes PDFDock the ideal solution for sensitive items like identity cards, tax forms, receipts, passports, and medical records. PDFDock works smoothly across all desktop and mobile devices—including Windows, macOS, Linux, Android, and iOS—with zero installation, zero file size limits, and full GDPR compliance.",
+    keywords: [
+      "images to pdf", "jpg to pdf", "png to pdf", "photo to pdf", "convert image to pdf",
+      "picture to pdf", "img to pdf", "image to pdf converter", "jpg to pdf converter free",
+      "convert photos to pdf on phone", "ilovepdf alternative", "smallpdf alternative",
+      "free pdf converter no upload", "convert multiple images to pdf", "webp to pdf", "offline photo to pdf"
+    ],
+    relatedSlugs: ["merge-pdf", "compress-pdf", "pdf-to-images", "crop-image"],
     steps: [
-      "Drag and drop your images (JPG, PNG, or WebP) into the upload area, or click to browse files.",
-      "Reorder images using drag handles or arrow buttons to set the page sequence.",
-      "Rotate individual images by 90° if needed using the rotation button.",
-      "Click 'Process Files' to combine images into a single PDF document.",
-      "Download your finished PDF — it's ready to share, print, or archive."
+      "Select your image files (JPG, PNG, WebP) by dragging them into the drop zone or clicking 'Browse Files'.",
+      "Arrange page order by dragging thumbnail cards or using page reorder controls.",
+      "Optionally rotate individual images by 90-degree increments to correct camera orientation.",
+      "Click 'Process Files' to compile the image stream into a standardized PDF file in local memory.",
+      "Click 'Download' to save your new PDF document directly to your device."
     ],
     faqs: [
       {
-        q: "Is it safe to convert images to PDF here?",
-        a: "Absolutely. PDFDock runs entirely in your browser using JavaScript and WebAssembly. Your images are never uploaded to any server — they stay 100% on your device."
+        q: "Is it safe to convert private photos and documents to PDF here?",
+        a: "Yes, 100% safe. PDFDock uses local browser execution engines (PDF-lib and HTML5 Canvas API) to render images directly into PDF page layers. Your files never leave your computer or phone, meaning third parties and cloud servers cannot view or store your data."
       },
       {
-        q: "What image formats can I convert to PDF?",
-        a: "We support JPEG, JPG, PNG, and WebP formats. All formats are converted client-side with no quality loss."
+        q: "What image formats can I convert into a PDF?",
+        a: "PDFDock supports all popular web image formats including JPG, JPEG, PNG, and WebP. You can mix and match different file types in a single batch without converting them beforehand."
       },
       {
-        q: "Is there a file size or count limit?",
-        a: "No artificial limits. Since processing uses your device's memory, you can convert as many images as your browser can handle."
+        q: "Are there any file size or conversion limits?",
+        a: "No. Unlike competitors that limit free users to 2 operations per day or maximum 15MB file sizes, PDFDock imposes no artificial limits. Processing capacity depends solely on your device's memory."
       },
       {
-        q: "Does this work on mobile devices?",
-        a: "Yes. PDFDock works on any modern browser — Chrome, Safari, Firefox, Edge — on phones, tablets, and desktops across all operating systems."
+        q: "Can I convert images to PDF without an active internet connection?",
+        a: "Yes. Once PDFDock loads in your browser, the image-to-PDF engine runs offline. You can disconnect from Wi-Fi or cellular data and continue converting documents seamlessly."
       },
       {
-        q: "Do I need to install any software?",
-        a: "No installation required. PDFDock is a web app that runs directly in your browser. Just visit the page and start converting."
+        q: "Does image quality drop when converting to PDF?",
+        a: "No. PDFDock preserves original image resolution and color bit-depth inside the output PDF container. Pixel data is embedded cleanly into PDF page streams."
       },
       {
-        q: "How is PDFDock different from iLovePDF or SmallPDF?",
-        a: "Unlike iLovePDF and SmallPDF which upload your files to their servers, PDFDock processes everything 100% in your browser. Your images never leave your device, making it the most private option available. Plus, it's completely free with no limits or signup required."
+        q: "How does PDFDock compare to iLovePDF or SmallPDF for Image to PDF?",
+        a: "iLovePDF and SmallPDF require uploading your photos to remote servers. PDFDock operates entirely client-side—offering instant processing speed, unlimited free usage, and total privacy guaranteed."
       },
       {
-        q: "Can I convert images to PDF without uploading them?",
-        a: "Yes! PDFDock converts images to PDF entirely in your browser. No files are ever uploaded to any server — this is the key difference from other online PDF tools."
+        q: "Can I convert photos from my smartphone or tablet?",
+        a: "Yes. PDFDock is fully responsive and optimized for mobile Safari, Chrome, and Firefox on iOS and Android devices."
       }
     ],
     comparison: {
       heading: "Why Choose PDFDock Over iLovePDF & SmallPDF for Image to PDF?",
-      intro: "When you search for 'images to PDF' or 'JPG to PDF converter', most tools require uploading your personal photos to their servers. PDFDock is the only tool that converts images to PDF 100% in your browser — no upload, no signup, no limits.",
+      intro: "When converting sensitive images like passports, driver's licenses, or business receipts to PDF, uploading files to public servers introduces privacy risks. PDFDock provides an instant, client-side alternative with zero server uploads.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No — 100% browser-based", others: "Yes — files uploaded to servers" },
-        { feature: "Privacy", pdfdock: "Complete — files never leave device", others: "Files stored on third-party servers" },
-        { feature: "Free Usage Limit", pdfdock: "Unlimited — no restrictions", others: "Limited free tier, then paid" },
-        { feature: "Account Required", pdfdock: "No signup needed", others: "Account required for full features" },
-        { feature: "Works Offline", pdfdock: "Yes — after page loads", others: "No — requires active connection" },
-        { feature: "GDPR Compliant", pdfdock: "Inherently — no data processed", others: "Depends on server location" }
+        { feature: "File Upload Required", pdfdock: "No — 100% browser-based", others: "Yes — uploaded to remote cloud" },
+        { feature: "Data Privacy", pdfdock: "Complete — files stay on device", others: "Files stored temporarily on servers" },
+        { feature: "Usage Limits", pdfdock: "Unlimited free conversions", others: "Paywalls or daily caps (e.g. 2 files/day)" },
+        { feature: "Account Signup", pdfdock: "No signup required", others: "Required for high resolution / batch" },
+        { feature: "Offline Support", pdfdock: "Yes — works without internet", others: "No — requires active connection" },
+        { feature: "Regulatory Compliance", pdfdock: "Inherently GDPR, CCPA & HIPAA compliant", others: "Varies depending on server region" }
       ]
     }
   },
+
   "merge-pdf": {
     title: "Merge PDF — Combine PDF Files Online Free",
     description: "Merge multiple PDF files into one free. No upload, no signup. Private iLovePDF & SmallPDF alternative. Combine PDFs in your browser on any device.",
-    h1: "Merge PDF Files Online",
-    intro: "Combine two or more PDF documents into a single file in any order. PDFDock copies exact page structures, fonts, and images — zero quality loss. Everything runs locally in your browser. No files are uploaded, no account needed. Fully private, GDPR-compliant, and works on every device and operating system. A truly private alternative to iLovePDF, SmallPDF, and Adobe Acrobat online.",
-    keywords: ["merge pdf", "combine pdf", "join pdf", "pdf merger", "merge pdf files", "concatenate pdf", "merge pdf online free", "combine pdf files without uploading", "ilovepdf merge alternative", "smallpdf merge alternative", "free pdf merger no signup", "join pdf files online"],
-    relatedSlugs: ["split-pdf", "compress-pdf", "images-to-pdf"],
+    h1: "Merge PDF Files Online Privately",
+    intro: "Combine two or more PDF files into a single, organized document without sending your data across the internet. PDFDock reads structural PDF node trees locally in JavaScript, stitching pages, vectors, fonts, and embedded images together with zero quality degradation. Whether you are assembling financial audits, legal filings, academic papers, or job application materials, PDFDock completes your merge tasks instantly. Free forever, with no file size restrictions, no accounts, and complete privacy protection.",
+    keywords: [
+      "merge pdf", "combine pdf", "join pdf", "pdf merger", "merge pdf files",
+      "concatenate pdf", "merge pdf online free", "combine pdf files without uploading",
+      "ilovepdf merge alternative", "smallpdf merge alternative", "free pdf merger no signup", "join pdf files online"
+    ],
+    relatedSlugs: ["split-pdf", "compress-pdf", "images-to-pdf", "remove-pages"],
     steps: [
-      "Add two or more PDF files by dragging them in or clicking to browse.",
-      "Reorder files using drag handles to set the merge sequence.",
-      "Click 'Process Files' to combine all documents into one PDF.",
-      "Download your merged PDF — ready to share or print."
+      "Add two or more PDF files by dragging them into the drop zone or choosing files from your device.",
+      "Reorder the document list using drag-and-drop handles to set your exact page sequence.",
+      "Click 'Process Files' to merge the byte structures in local browser memory.",
+      "Download the combined PDF document directly to your computer or mobile device."
     ],
     faqs: [
       {
-        q: "Can I merge password-protected PDFs?",
-        a: "Encrypted PDFs must have their password removed before merging. Use our Protect PDF tool to manage encryption."
+        q: "Are my merged PDF files saved or tracked on your server?",
+        a: "Never. PDFDock has no backend server or storage database for user files. PDF merging happens inside your web browser's RAM."
       },
       {
-        q: "Will merging change my page layouts?",
-        a: "No. PDFDock copies exact page structures including fonts, vectors, and images. Your layouts remain pixel-perfect."
+        q: "Can I merge password-protected PDF files?",
+        a: "Protected PDFs must be unlocked before merging. You can enter the password in PDFDock to decrypt and combine encrypted documents."
       },
       {
-        q: "Are my documents stored on your servers?",
-        a: "Never. All processing runs 100% in your browser. We have no backend servers that receive or store files."
+        q: "Will merging PDFs distort vector graphics or font formatting?",
+        a: "No. PDFDock performs structural stream copying, preserving exact vector paths, embedded fonts, layers, and color profiles."
       },
       {
-        q: "Is there a limit on how many PDFs I can merge?",
-        a: "No limit. You can merge as many files as your browser's memory allows. Works with documents of any size."
+        q: "How many PDF files can I merge at once?",
+        a: "There are no arbitrary software limits. You can combine as many files as your device's available memory can process."
       },
       {
-        q: "Does this work without an internet connection?",
-        a: "Once the page loads, yes. The merge engine runs entirely offline in your browser — no active connection needed."
+        q: "Why is PDFDock faster than cloud PDF mergers?",
+        a: "Cloud utilities require uploading gigabytes of data over your connection before processing starts. PDFDock executes locally on your hardware, eliminating upload and download bottlenecks."
       },
       {
-        q: "Is PDFDock better than iLovePDF for merging PDFs?",
-        a: "PDFDock is more private than iLovePDF — your PDFs are never uploaded to any server. It's also completely free with no file count limits or account requirements."
+        q: "Is PDFDock free to use for commercial projects?",
+        a: "Yes. PDFDock is 100% free for personal, commercial, academic, and enterprise usage without subscription fees."
       }
     ],
     comparison: {
       heading: "PDFDock vs iLovePDF vs SmallPDF — PDF Merge Comparison",
-      intro: "Looking for the best free PDF merger? Here's how PDFDock compares to iLovePDF and SmallPDF for combining PDF files online.",
+      intro: "Compare how PDFDock handles document combining versus traditional cloud PDF tools.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No — 100% browser-based", others: "Yes — files uploaded to servers" },
-        { feature: "Privacy", pdfdock: "Complete — files never leave device", others: "Files stored temporarily on servers" },
-        { feature: "Free File Limit", pdfdock: "Unlimited files", others: "Limited to 1-2 tasks per hour" },
-        { feature: "Account Required", pdfdock: "No signup needed", others: "Required for full access" },
+        { feature: "File Upload Required", pdfdock: "No — local memory execution", others: "Yes — server uploads" },
+        { feature: "Processing Speed", pdfdock: "Instant — zero transfer delay", others: "Slow — upload/download bottleneck" },
+        { feature: "Daily File Limit", pdfdock: "Unlimited files", others: "2 files per day on free tier" },
+        { feature: "Privacy Guarantee", pdfdock: "100% private on client device", others: "Third-party cloud storage" },
         { feature: "Works Offline", pdfdock: "Yes", others: "No" },
-        { feature: "Quality Loss", pdfdock: "Zero — exact page copy", others: "Varies by compression" }
+        { feature: "Quality Loss", pdfdock: "Zero — exact structure merge", others: "May re-compress assets" }
       ]
     }
   },
+
   "pdf-to-images": {
     title: "PDF to Image — Convert PDF to PNG, JPG Free",
     description: "Convert PDF pages to high-quality PNG images instantly. Free, private, no upload. Best alternative to iLovePDF & SmallPDF. Works on any device.",
-    h1: "Convert PDF to Images Online",
-    intro: "Extract every page from a PDF and save them as high-resolution PNG images inside a ZIP archive. Powered by a local rendering engine — your documents never leave your device. Works on all platforms, browsers, and screen sizes worldwide. Unlike iLovePDF or SmallPDF, your sensitive documents stay completely private.",
-    keywords: ["pdf to image", "pdf to png", "pdf to jpg", "convert pdf to image", "extract pdf pages", "pdf to picture", "pdf to image converter free", "pdf to png online", "convert pdf to jpg free", "ilovepdf pdf to image alternative", "export pdf pages as images"],
-    relatedSlugs: ["images-to-pdf", "compress-image", "split-pdf"],
+    h1: "Convert PDF to PNG Images Online",
+    intro: "Extract every page of your PDF document into high-resolution, uncompressed PNG images directly in your browser. PDFDock uses PDF.js rendering engines to render vector paths, typography, and embedded graphics into sharp 1.5x scale raster frames, packaging the output cleanly into a downloadable ZIP archive. Because rendering takes place inside your browser memory, confidential agreements, slides, and invoices remain protected on your hardware.",
+    keywords: [
+      "pdf to image", "pdf to png", "pdf to jpg", "convert pdf to image",
+      "extract pdf pages", "pdf to picture", "pdf to image converter free", "pdf to png online",
+      "convert pdf to jpg free", "ilovepdf pdf to image alternative", "export pdf pages as images"
+    ],
+    relatedSlugs: ["images-to-pdf", "compress-image", "split-pdf", "resize-image"],
     steps: [
-      "Select or drag a PDF document into the upload zone.",
-      "Click 'Process Files' to begin rendering pages locally.",
-      "Each page is converted to a high-quality PNG image.",
-      "Download the ZIP archive containing all page images."
+      "Upload or drop your PDF document into the PDF to Image converter.",
+      "PDFDock automatically inspects page count and rendering configurations.",
+      "Click 'Process Files' to render every page onto browser canvas contexts.",
+      "Download a single structured ZIP file containing sharp PNG images of every page."
     ],
     faqs: [
       {
-        q: "What image format are pages exported in?",
-        a: "Pages are exported as high-quality PNG images at 1.5× scale for sharp, print-ready results."
+        q: "What resolution and quality are exported images?",
+        a: "Images are rendered at 1.5x high-DPI canvas scale as lossless PNG files, ensuring crisp text legibility for presentations and print."
       },
       {
-        q: "Can I convert specific pages only?",
-        a: "Currently all pages are extracted. You can select specific images from the downloaded ZIP archive."
+        q: "Does PDFDock upload my PDF file to convert it into images?",
+        a: "No. PDF rendering is executed by client-side WebAssembly and JavaScript engines. No bytes are sent over the network."
       },
       {
-        q: "Does this require an internet connection?",
-        a: "Only to load the page initially. Once loaded, the PDF rendering engine runs 100% offline."
+        q: "What if my PDF document contains multiple pages?",
+        a: "PDFDock extracts all pages in numerical order and packages them into a convenient ZIP archive for quick 1-click downloading."
       },
       {
-        q: "Will this work with scanned PDF documents?",
-        a: "Yes. Scanned PDFs contain page images which are rendered and exported just like any other PDF page."
+        q: "Can I convert password-protected PDFs to images?",
+        a: "Yes. Simply enter your document password when prompted to unlock and extract page frames."
       },
       {
-        q: "Is this tool free to use?",
-        a: "Completely free with no limits. No account, no watermarks, no hidden charges."
-      },
-      {
-        q: "How does this compare to iLovePDF's PDF to Image tool?",
-        a: "PDFDock converts PDFs to images entirely in your browser — no file uploads needed. iLovePDF requires uploading your document to their servers, which may not be suitable for confidential files."
+        q: "Does PDF to Image work on iPhone, iPad, and Android?",
+        a: "Yes. PDFDock is fully responsive and compatible with mobile Safari, Chrome, and Edge."
       }
     ],
     comparison: {
-      heading: "Why PDFDock Is the Best PDF to Image Converter",
-      intro: "Convert PDF pages to high-quality PNG or JPG images without uploading sensitive documents to any server.",
+      heading: "Why PDFDock Is the Best Private PDF to Image Converter",
+      intro: "Convert PDF pages to clean PNG images without risking document exposure on third-party cloud servers.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No — rendered in browser", others: "Yes — uploaded to cloud" },
-        { feature: "Output Quality", pdfdock: "1.5× high-resolution PNG", others: "Standard resolution" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Files on third-party servers" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited free tier" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" },
-        { feature: "Signup Required", pdfdock: "No", others: "Often required" }
+        { feature: "File Upload Required", pdfdock: "No — in-browser PDF.js engine", others: "Yes — cloud server conversion" },
+        { feature: "Output Resolution", pdfdock: "High-DPI 1.5x sharp PNG", others: "Standard low-res on free tier" },
+        { feature: "Security & Privacy", pdfdock: "100% private — client memory", others: "Transmitted over cloud servers" },
+        { feature: "Page Restrictions", pdfdock: "Unlimited pages per PDF", others: "Capped on free accounts" },
+        { feature: "Works Offline", pdfdock: "Yes", others: "No" }
       ]
     }
   },
+
   "compress-pdf": {
     title: "Compress PDF — Reduce PDF File Size Free Online",
     description: "Shrink PDF file size online without losing quality. No upload, 100% private. Best free alternative to iLovePDF & SmallPDF compression.",
-    h1: "Compress PDF Online",
-    intro: "Reduce PDF file sizes by re-encoding embedded images with adjustable quality settings. Perfect for email attachments, web uploads, and archiving. All compression happens locally in your browser — no files are sent to any server. Works across all devices and operating systems. More private than iLovePDF, SmallPDF, or Adobe Acrobat online.",
-    keywords: ["compress pdf", "reduce pdf size", "shrink pdf", "pdf compressor", "make pdf smaller", "optimize pdf", "compress pdf online free", "reduce pdf file size without losing quality", "ilovepdf compress alternative", "smallpdf compress alternative", "pdf compressor no upload"],
-    relatedSlugs: ["merge-pdf", "split-pdf", "compress-image"],
+    h1: "Compress PDF Files Online Privately",
+    intro: "Reduce PDF file sizes dramatically while maintaining clear text readability. PDFDock optimizes PDF documents by downsampling high-density embedded images and stripping redundant metadata objects entirely in client browser memory. Adjust compression sliders to fine-tune image quality and resolution scales according to your requirements. Ideal for meeting email attachment limits, portal upload quotas, and web publication standards.",
+    keywords: [
+      "compress pdf", "reduce pdf size", "shrink pdf", "pdf compressor", "make pdf smaller",
+      "optimize pdf", "compress pdf online free", "reduce pdf file size without losing quality",
+      "ilovepdf compress alternative", "smallpdf compress alternative", "pdf compressor no upload"
+    ],
+    relatedSlugs: ["merge-pdf", "split-pdf", "compress-image", "pdf-to-images"],
     steps: [
-      "Upload the PDF document you want to compress.",
-      "Adjust the quality slider — lower values produce smaller files.",
-      "Click 'Process Files' to compress the PDF locally.",
-      "Download your optimized, smaller PDF file."
+      "Drag and drop your PDF file into the PDF compression dropzone.",
+      "Use the Quality slider (e.g. 50% - 80%) to balance file size reduction against image sharpness.",
+      "Adjust Resolution Scale if you want to downscale large image dimensions inside the PDF.",
+      "Click 'Process Files' to execute local compression.",
+      "Inspect original vs compressed file sizes and download your optimized PDF."
     ],
     faqs: [
       {
-        q: "Will compression affect text quality?",
-        a: "No. Compression targets embedded images and graphics. Text remains perfectly sharp and fully searchable."
+        q: "Will compressing a PDF degrade text and font sharpess?",
+        a: "No. PDFDock selectively re-compresses embedded raster images. Vector fonts, text layers, lines, and form fields remain untouched and sharp."
       },
       {
-        q: "What compression level should I use?",
-        a: "For most documents, 0.5–0.8 provides excellent balance between file size reduction and visual quality."
+        q: "Are my documents uploaded to external servers during compression?",
+        a: "No. Compression algorithms run in JavaScript workers in your local web browser."
       },
       {
-        q: "Is my PDF uploaded to compress it?",
-        a: "No. Everything runs in your browser's memory. Your file never leaves your device."
+        q: "What is the recommended quality setting for email attachments?",
+        a: "A quality setting of 50% to 70% with 1.0x resolution scale typically reduces PDF size by 40% to 75% with minimal visible loss."
       },
       {
-        q: "Can I compress PDFs on my phone?",
-        a: "Yes. PDFDock works on all modern mobile browsers including Chrome, Safari, and Firefox on iOS and Android."
+        q: "Can I compress password-encrypted PDFs?",
+        a: "Yes. Enter your password in the decryption field to compress protected files."
       },
       {
-        q: "Is this GDPR compliant?",
-        a: "Yes. Since no data leaves your device, PDFDock is inherently compliant with GDPR, CCPA, and other privacy regulations."
-      },
-      {
-        q: "How does PDFDock compare to iLovePDF for compressing PDFs?",
-        a: "PDFDock compresses PDFs entirely in your browser with no upload required. iLovePDF uploads your files to their servers. PDFDock also has no usage limits — compress as many PDFs as you want, completely free."
+        q: "Why use PDFDock instead of Adobe Acrobat Online or SmallPDF?",
+        a: "PDFDock gives you granular control over compression quality without imposing daily file limits, subscription fees, or server uploads."
       }
     ],
     comparison: {
-      heading: "PDFDock vs iLovePDF vs SmallPDF — PDF Compression",
-      intro: "Need to reduce your PDF file size? Here's why PDFDock is the most private and unlimited PDF compressor available.",
+      heading: "PDF Compression Benchmark — PDFDock vs iLovePDF vs SmallPDF",
+      intro: "Compare privacy, compression options, and usage freedom.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No — in-browser compression", others: "Yes — server-side processing" },
-        { feature: "Adjustable Quality", pdfdock: "Full slider control", others: "Preset levels only" },
-        { feature: "Privacy", pdfdock: "100% private — no upload", others: "Files processed on servers" },
-        { feature: "Free Usage Limit", pdfdock: "Unlimited", others: "1-2 files per hour free" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" },
-        { feature: "Account Required", pdfdock: "No", others: "Required for batch" }
+        { feature: "File Upload Required", pdfdock: "No — browser client-side", others: "Yes — cloud server upload" },
+        { feature: "Quality Control", pdfdock: "Granular slider & scale control", others: "Fixed presets or paid feature" },
+        { feature: "Privacy Safety", pdfdock: "100% private — zero data retention", others: "Files stored on cloud servers" },
+        { feature: "Usage Caps", pdfdock: "Unlimited free compressions", others: "Restricted after 1-2 tasks" },
+        { feature: "Offline Processing", pdfdock: "Yes", others: "No" }
       ]
     }
   },
+
   "split-pdf": {
     title: "Split PDF — Extract Pages from PDF Free Online",
     description: "Split PDF into separate pages or extract ranges. Free, private, no upload. Best alternative to iLovePDF & SmallPDF splitter. Any device.",
-    h1: "Split PDF Online",
-    intro: "Extract specific pages or split your entire PDF into individual page files. Define custom ranges like '1-3, 5, 7-10' or extract every page separately. Fully offline, fully private — your document never touches a server. A secure alternative to iLovePDF, SmallPDF, and other online PDF splitters.",
-    keywords: ["split pdf", "extract pdf pages", "separate pdf pages", "pdf splitter", "divide pdf", "cut pdf pages", "split pdf online free", "extract pages from pdf", "pdf page extractor", "ilovepdf split alternative", "split pdf without uploading"],
-    relatedSlugs: ["merge-pdf", "remove-pages", "compress-pdf"],
+    h1: "Split PDF Pages Online Privately",
+    intro: "Extract specific page ranges or split an entire PDF into individual page files instantly. Specify ranges like '1-3, 5, 8-12' or extract every page separately into a ZIP package. PDFDock processes document page trees entirely inside your browser, guaranteeing zero file exposure to external servers. Ideal for isolating document chapters, extracting invoice pages, and splitting confidential contracts.",
+    keywords: [
+      "split pdf", "extract pdf pages", "separate pdf pages", "pdf splitter", "divide pdf",
+      "cut pdf pages", "split pdf online free", "extract pages from pdf", "pdf page extractor",
+      "ilovepdf split alternative", "split pdf without uploading"
+    ],
+    relatedSlugs: ["merge-pdf", "remove-pages", "compress-pdf", "rotate-pdf"],
     steps: [
-      "Drag and drop your PDF file into the workspace.",
-      "Enter a page range (e.g., '1-3, 5, 7-10') or leave blank to split all pages.",
-      "Click 'Process Files' to extract pages locally.",
-      "Download individual PDFs or a ZIP archive with all extracted pages."
+      "Drag and drop your PDF document into the PDF splitter tool.",
+      "Choose 'Extract all pages (ZIP)' or select 'Custom Ranges'.",
+      "If using custom ranges, type intervals (e.g. '1-4, 7, 10-12').",
+      "Click 'Process Files' to split the document in browser RAM.",
+      "Download your split PDF files or ZIP archive."
     ],
     faqs: [
       {
         q: "How do I format custom page ranges?",
-        a: "Use commas and dashes: '1-3, 5, 7-10' extracts pages 1, 2, 3, 5, 7, 8, 9, and 10 into separate groups."
+        a: "Separate page numbers with commas and ranges with hyphens (e.g. '1-5, 8, 11-15'). PDFDock will extract matching pages into separate documents."
       },
       {
-        q: "Can I split scanned PDFs?",
-        a: "Yes. Scanned pages are split exactly like standard pages, retaining all image content intact."
+        q: "Are my extracted pages uploaded anywhere?",
+        a: "No. PDF splitting is performed by PDF-lib in client-side memory."
       },
       {
-        q: "Are my files uploaded to split them?",
-        a: "No. All processing is handled client-side using JavaScript. Your files never leave your computer."
+        q: "Can I split scanned PDF files?",
+        a: "Yes. Scanned PDF pages are split seamlessly without altering image graphics or layout coordinates."
       },
       {
-        q: "What if I enter an invalid page number?",
-        a: "PDFDock validates ranges against the total page count and will notify you if any numbers are out of bounds."
-      },
-      {
-        q: "Does splitting preserve bookmarks and links?",
-        a: "Page content including text, images, and annotations are preserved. Document-level bookmarks may be simplified."
-      },
-      {
-        q: "Why use PDFDock instead of iLovePDF to split PDFs?",
-        a: "PDFDock splits PDFs entirely in your browser — no file upload needed. It's completely free with no usage limits, and your documents stay 100% private on your device."
+        q: "Is there a page limit for PDF splitting?",
+        a: "No limit. You can split documents containing hundreds of pages effortlessly."
       }
     ],
     comparison: {
-      heading: "Best Free PDF Splitter — PDFDock vs Others",
-      intro: "Split your PDFs privately without uploading sensitive documents to cloud servers.",
+      heading: "Why PDFDock Is the Safest Free PDF Splitter",
+      intro: "Isolate PDF pages securely without uploading documents to remote cloud storage.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No — client-side only", others: "Yes — server processing" },
-        { feature: "Custom Page Ranges", pdfdock: "Full range syntax support", others: "Basic range support" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Files on servers" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" },
-        { feature: "Output Format", pdfdock: "Individual PDFs + ZIP", others: "Varies" }
+        { feature: "File Upload Required", pdfdock: "No — 100% in-browser", others: "Yes — server uploads" },
+        { feature: "Custom Range Syntax", pdfdock: "Full interval range support", others: "Basic or paid option" },
+        { feature: "Privacy & Compliance", pdfdock: "Zero data storage — GDPR safe", others: "Stored in cloud cache" },
+        { feature: "Output Package", pdfdock: "Single PDF or organized ZIP", others: "Varies by tier" }
       ]
     }
   },
+
   "protect-pdf": {
     title: "Protect PDF — Password Encrypt PDF Free Online",
     description: "Add password protection to PDF files instantly. Strong encryption, 100% offline, no upload. Best private alternative to iLovePDF & SmallPDF.",
-    h1: "Protect PDF with Password",
-    intro: "Encrypt your PDF documents with a secure password to prevent unauthorized access. PDFDock applies strong encryption entirely inside your browser — your password and file never leave your device. Ideal for confidential business, legal, and personal documents. The most secure alternative to iLovePDF and SmallPDF since your password is never transmitted.",
-    keywords: ["protect pdf", "encrypt pdf", "password pdf", "lock pdf", "secure pdf", "pdf password protection", "encrypt pdf online free", "password protect pdf without uploading", "ilovepdf encrypt alternative", "lock pdf free", "add password to pdf"],
-    relatedSlugs: ["merge-pdf", "compress-pdf", "add-watermark"],
+    h1: "Password Protect PDF Documents Online",
+    intro: "Secure your PDF documents with standard RC4 128-bit encryption directly in your browser. PDFDock encrypts PDF byte structures locally, preventing unauthorized opening and viewing. Because encryption happens on your machine, your cleartext document and security password are never sent over the internet.",
+    keywords: [
+      "protect pdf", "encrypt pdf", "password pdf", "lock pdf", "secure pdf",
+      "pdf password protection", "encrypt pdf online free", "password protect pdf without uploading",
+      "ilovepdf encrypt alternative", "lock pdf free", "add password to pdf"
+    ],
+    relatedSlugs: ["merge-pdf", "compress-pdf", "add-watermark", "remove-pages"],
     steps: [
-      "Add the PDF file you want to protect.",
-      "Enter a strong password in the input field.",
-      "Click 'Process Files' to apply encryption.",
-      "Download your password-protected PDF."
+      "Drop your PDF document into the PDF protection tool.",
+      "Enter your target encryption password in the password field.",
+      "Click 'Process Files' to apply password protection locally.",
+      "Download your encrypted, password-locked PDF file."
     ],
     faqs: [
       {
-        q: "What encryption standard is used?",
-        a: "PDFDock uses RC4 128-bit encryption, compatible with Adobe Acrobat and all major PDF readers worldwide."
+        q: "What encryption standard does PDFDock apply?",
+        a: "PDFDock applies standard 128-bit PDF password encryption, fully compatible with Adobe Acrobat, Apple Preview, Chrome, and all PDF viewers."
       },
       {
-        q: "What if I forget the password?",
-        a: "Since we never store your password or files on any server, forgotten passwords cannot be recovered. Store it safely."
+        q: "Does PDFDock record or store my password?",
+        a: "No. PDFDock runs 100% client-side with no backend database. Your password exists only in local browser runtime memory while generating the encrypted file."
       },
       {
-        q: "Is this safe for corporate documents?",
-        a: "Yes. Your file is encrypted entirely in-browser. No data is ever transmitted, making it fully compliant with corporate security policies."
-      },
-      {
-        q: "Can I remove the password later?",
-        a: "You'll need the original password to open the file in a PDF reader that supports removing encryption."
-      },
-      {
-        q: "Does encryption work on all devices?",
-        a: "Yes. The encryption engine runs in any modern browser on desktops, tablets, and mobile devices."
-      },
-      {
-        q: "Is PDFDock safer than iLovePDF for encrypting PDFs?",
-        a: "Yes. When you encrypt a PDF with iLovePDF or SmallPDF, your unencrypted file and password are sent to their servers. With PDFDock, encryption happens entirely in your browser — your password and file never leave your device."
+        q: "What happens if I forget my password?",
+        a: "Because PDFDock does not store passwords or user data, lost passwords cannot be retrieved. Keep a secure backup of your password."
       }
     ],
     comparison: {
-      heading: "Most Secure PDF Encryption — PDFDock vs Others",
-      intro: "When encrypting sensitive documents, the tool you use matters. PDFDock is the only PDF protector that never sees your password or file.",
+      heading: "PDF Encryption Security — PDFDock vs Cloud Tools",
+      intro: "Compare local client-side encryption against server-based encryption tools.",
       features: [
-        { feature: "Password Sent to Server", pdfdock: "Never — browser-only", others: "Yes — transmitted to encrypt" },
-        { feature: "File Upload Required", pdfdock: "No", others: "Yes" },
-        { feature: "Encryption Standard", pdfdock: "RC4 128-bit", others: "Varies" },
-        { feature: "Privacy", pdfdock: "Maximum — zero transmission", others: "Limited — server-side processing" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited" },
-        { feature: "GDPR Compliant", pdfdock: "Inherently", others: "Depends on provider" }
+        { feature: "Password Sent Over Network", pdfdock: "Never — local browser execution", others: "Yes — sent to remote server" },
+        { feature: "Cleartext File Upload", pdfdock: "No — file stays local", others: "Yes — uploaded unencrypted" },
+        { feature: "Privacy Security", pdfdock: "Maximum client security", others: "Exposed to server logs" }
       ]
     }
   },
+
   "compress-image": {
     title: "Compress Image — Reduce Image Size Free Online",
     description: "Shrink JPG, PNG, WebP images online. Adjust quality, instant results. No upload, 100% private. Best free image compressor alternative.",
-    h1: "Compress Images Online",
-    intro: "Reduce image file sizes with customizable quality settings. Compare original and compressed sizes instantly. Perfect for web optimization, email attachments, and social media. All processing runs locally — your images stay private. A faster, more private alternative to TinyPNG, iLovePDF, and SmallPDF image compression.",
-    keywords: ["compress image", "reduce image size", "shrink photo", "image compressor", "optimize image", "compress jpg png", "compress image online free", "reduce photo size", "image compressor no upload", "tinypng alternative", "compress jpg without uploading", "reduce image file size"],
-    relatedSlugs: ["resize-image", "convert-image", "images-to-pdf"],
+    h1: "Compress Images Online Privately",
+    intro: "Optimize image file sizes for web speed, email delivery, and storage optimization. PDFDock re-encodes JPG, PNG, and WebP images via HTML5 Canvas and browser WebWorkers. Adjust compression quality sliders to cut image weight by up to 80% while retaining crisp visual fidelity.",
+    keywords: [
+      "compress image", "reduce image size", "shrink photo", "image compressor",
+      "optimize image", "compress jpg png", "compress image online free", "reduce photo size",
+      "image compressor no upload", "tinypng alternative", "compress jpg without uploading"
+    ],
+    relatedSlugs: ["resize-image", "convert-image", "images-to-pdf", "crop-image"],
     steps: [
-      "Select your image file — JPEG, PNG, or WebP.",
-      "Adjust the quality slider (10% to 100%).",
-      "Click 'Process Files' to compress the image locally.",
-      "Preview the result, verify quality, and download."
+      "Select your image file (JPEG, PNG, WebP).",
+      "Drag the Quality slider to set desired compression intensity.",
+      "Click 'Process Files' to compress canvas buffer data.",
+      "Download your optimized image file."
     ],
     faqs: [
       {
-        q: "Will compression change my image format?",
-        a: "No. The output retains the same format as the input (JPG stays JPG, PNG stays PNG)."
+        q: "How does PDFDock compress images without server processing?",
+        a: "PDFDock leverages browser Canvas APIs and native image encoding specs to re-sample image quantization matrices locally in your web browser."
       },
       {
-        q: "How does the compression work?",
-        a: "PDFDock uses smart canvas re-encoding algorithms to optimize pixel data and strip unnecessary metadata without visible quality loss."
-      },
-      {
-        q: "Is image compression fully offline?",
-        a: "Yes. Once the page loads, all processing happens in your browser's memory with zero network activity."
-      },
-      {
-        q: "Can I compress multiple images at once?",
-        a: "Currently, images are processed one at a time for maximum quality control and preview accuracy."
-      },
-      {
-        q: "What's the best quality setting for web use?",
-        a: "For web images, 60-80% quality typically reduces file size by 50-70% while maintaining excellent visual clarity."
-      },
-      {
-        q: "How is PDFDock different from TinyPNG?",
-        a: "TinyPNG uploads your images to their servers for compression. PDFDock compresses entirely in your browser — no upload needed, unlimited files, and complete privacy."
+        q: "What formats can I compress?",
+        a: "PDFDock supports JPEG/JPG, PNG, and WebP images."
       }
     ],
     comparison: {
-      heading: "PDFDock vs TinyPNG vs iLovePDF — Image Compression",
-      intro: "Compress your images without uploading them to third-party servers. PDFDock offers unlimited, private image compression.",
+      heading: "PDFDock vs TinyPNG & Cloud Compressors",
+      intro: "Compress images locally without daily file limits or cloud uploads.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No — browser-based", others: "Yes — cloud processing" },
-        { feature: "Quality Control", pdfdock: "Full slider (10-100%)", others: "Auto or preset only" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Images on servers" },
-        { feature: "Free Limit", pdfdock: "Unlimited", others: "20 images/batch (TinyPNG)" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" },
-        { feature: "Instant Preview", pdfdock: "Yes", others: "Download to check" }
+        { feature: "File Upload Required", pdfdock: "No — browser client", others: "Yes — server uploads" },
+        { feature: "Quality Controls", pdfdock: "Full 10-100% slider", others: "Fixed preset" },
+        { feature: "Usage Caps", pdfdock: "Unlimited free compressions", others: "Limited per day" }
       ]
     }
   },
+
   "resize-image": {
     title: "Resize Image — Change Dimensions Free Online",
     description: "Resize photos by pixels or percentage. Lock aspect ratio. Free, private, no upload. Works in browser on any device. Best free image resizer.",
-    h1: "Resize Images Online",
-    intro: "Scale your photos to exact pixel dimensions with optional aspect-ratio locking. Resize for social media, websites, print, or any custom requirement. Processed entirely in your browser for complete privacy. No signup, no upload, no limits.",
-    keywords: ["resize image", "resize photo", "change image size", "image resizer", "scale image", "change photo dimensions", "resize image online free", "resize photo for instagram", "resize image pixels", "image resizer no upload", "bulk resize images free"],
-    relatedSlugs: ["compress-image", "crop-image", "convert-image"],
+    h1: "Resize Image Dimensions Online",
+    intro: "Scale photo dimensions with pixel accuracy and optional aspect-ratio locking. PDFDock resizes images directly on local HTML5 canvas elements, allowing you to prepare photos for social media banners, website assets, and passport requirements safely.",
+    keywords: [
+      "resize image", "resize photo", "change image size", "image resizer",
+      "scale image", "change photo dimensions", "resize image online free", "resize photo for instagram"
+    ],
+    relatedSlugs: ["compress-image", "crop-image", "convert-image", "images-to-pdf"],
     steps: [
-      "Upload your photo, logo, or image file.",
-      "Enter target width and height in pixels.",
-      "Toggle aspect-ratio lock to prevent stretching.",
-      "Click 'Process Files' to resize and download."
+      "Upload your target image file.",
+      "Type new Target Width or Target Height values in pixels.",
+      "Toggle 'Lock Aspect Ratio' to maintain proportions.",
+      "Click 'Process Files' to render the resized canvas image.",
+      "Download your scaled image file."
     ],
     faqs: [
       {
-        q: "Does aspect-ratio locking prevent distortion?",
-        a: "Yes. When enabled, changing the width automatically updates the height proportionally and vice versa."
+        q: "Does aspect ratio locking prevent stretching?",
+        a: "Yes. When aspect ratio lock is enabled, updating width calculates proportional height automatically."
       },
       {
-        q: "Can I resize images to larger dimensions?",
-        a: "Yes, but upscaling beyond the original resolution may cause pixelation depending on the source image quality."
-      },
-      {
-        q: "Where are my files processed?",
-        a: "Entirely in your browser. No image data is ever sent to any server or cloud service."
-      },
-      {
-        q: "What formats are supported for resizing?",
-        a: "JPEG, PNG, and WebP images can all be resized. The output maintains the original format."
-      },
-      {
-        q: "Can I resize images for social media?",
-        a: "Absolutely. Enter the platform's recommended dimensions (e.g., 1080×1080 for Instagram) and resize instantly."
+        q: "Is my original image overwritten?",
+        a: "No. PDFDock creates a brand new resized image file for download while your original file stays safe on your device."
       }
     ],
     comparison: {
-      heading: "Best Free Online Image Resizer — PDFDock",
-      intro: "Resize your images with pixel-perfect precision without uploading them to any server.",
+      heading: "Best Private Image Resizer — PDFDock",
+      intro: "Scale images with precision without sending graphics to remote cloud servers.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No — browser-based", others: "Yes" },
-        { feature: "Aspect Ratio Lock", pdfdock: "Yes — toggle on/off", others: "Varies" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Images on servers" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited" },
-        { feature: "Custom Dimensions", pdfdock: "Exact pixel control", others: "Preset sizes often" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" }
+        { feature: "File Upload Required", pdfdock: "No — canvas rendering", others: "Yes — cloud server processing" },
+        { feature: "Privacy Protection", pdfdock: "100% private on device", others: "Stored in cloud temp folder" }
       ]
     }
   },
+
   "convert-image": {
     title: "Convert Image Format — PNG, JPG, WebP Free Online",
     description: "Convert images between PNG, JPEG, WebP instantly. Free, offline, private, no upload. Best free image format converter for any device.",
-    h1: "Convert Image Format Online",
-    intro: "Transcode images between PNG, JPEG, and WebP formats with a single click. Whether you need WebP for web performance, JPEG for compatibility, or PNG for transparency — PDFDock handles it instantly inside your browser. No upload, no signup, completely private.",
-    keywords: ["convert image format", "png to jpg", "jpg to png", "image converter", "webp to png", "change image format", "convert png to jpg free", "image format converter online", "webp to jpg converter", "convert image without uploading", "png to jpeg online free"],
-    relatedSlugs: ["compress-image", "resize-image", "crop-image"],
+    h1: "Convert Image Formats Online Privately",
+    intro: "Transcode graphics between PNG, JPEG, and WebP formats instantly. Convert heavy PNG graphics to web-optimized WebP or universal JPEG formats cleanly within your browser.",
+    keywords: [
+      "convert image format", "png to jpg", "jpg to png", "image converter",
+      "webp to png", "change image format", "convert png to jpg free", "webp to jpg converter"
+    ],
+    relatedSlugs: ["compress-image", "resize-image", "crop-image", "images-to-pdf"],
     steps: [
-      "Select the image you want to convert.",
-      "Choose your target format — PNG, JPEG, or WebP.",
-      "Click 'Process Files' to convert instantly.",
-      "Download the converted image file."
+      "Select your source image file.",
+      "Choose target format: PNG, JPEG, or WebP.",
+      "Click 'Process Files' to transcode image pixels.",
+      "Download your newly formatted image file."
     ],
     faqs: [
       {
-        q: "What happens to transparency when converting PNG to JPEG?",
-        a: "JPEG doesn't support transparency. Transparent areas will be converted to a white background automatically."
-      },
-      {
-        q: "Is WebP conversion supported in all browsers?",
-        a: "Yes. All modern browsers (Chrome, Firefox, Safari, Edge) support WebP encoding and decoding."
-      },
-      {
-        q: "Are my images logged or tracked?",
-        a: "No. All conversion happens locally in your browser. PDFDock doesn't collect, log, or track any file data."
-      },
-      {
-        q: "Will format conversion affect image quality?",
-        a: "Converting to lossy formats (JPEG, WebP) may slightly reduce quality. PNG-to-PNG preserves exact quality."
-      },
-      {
-        q: "Why would I convert to WebP?",
-        a: "WebP offers superior compression — typically 25-35% smaller than JPEG with comparable quality. Ideal for web performance."
+        q: "What happens to PNG transparency when converting to JPEG?",
+        a: "Since JPEG does not support alpha transparency channels, transparent backgrounds are automatically filled with clean solid white."
       }
     ],
     comparison: {
-      heading: "Best Free Image Format Converter — PDFDock",
-      intro: "Convert between PNG, JPEG, and WebP formats instantly without uploading your images.",
+      heading: "Image Format Transcoding — PDFDock Advantages",
+      intro: "Convert image formats locally with speed and privacy.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No — browser-based", others: "Yes" },
-        { feature: "Supported Formats", pdfdock: "PNG, JPEG, WebP", others: "Varies" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Images uploaded" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited" },
-        { feature: "Speed", pdfdock: "Instant — no upload wait", others: "Depends on server" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" }
+        { feature: "Upload Required", pdfdock: "No — browser native transcode", others: "Yes — server conversion" },
+        { feature: "Format Options", pdfdock: "PNG, JPEG, WebP", others: "Varies" }
       ]
     }
   },
+
   "crop-image": {
     title: "Crop Image — Trim Photo Margins Free Online",
     description: "Crop images with exact pixel precision. Preview before saving. Free, private, no upload. Works in browser on any device worldwide.",
-    h1: "Crop Images Online",
-    intro: "Trim image boundaries with precise pixel offsets. Set exact crop dimensions, preview the selection, and export the cropped result. Everything runs in your browser — no data leaves your device.",
-    keywords: ["crop image", "trim image", "cut image", "crop photo", "image cropper", "trim photo margins", "crop image online free", "crop photo without uploading", "image cropper tool", "free photo cropper online"],
+    h1: "Crop Images Online with Pixel Precision",
+    intro: "Trim photo borders and isolate subjects with exact pixel offsets or circular crop paths. PDFDock renders your crop selections locally on canvas elements.",
+    keywords: [
+      "crop image", "trim image", "cut image", "crop photo",
+      "image cropper", "trim photo margins", "crop image online free"
+    ],
     relatedSlugs: ["resize-image", "compress-image", "convert-image"],
     steps: [
-      "Select the image file you want to crop.",
-      "Enter crop offsets (X, Y) and target width/height in pixels.",
-      "Preview the crop selection on the image.",
-      "Click 'Process Files' to crop and download the result."
+      "Upload your photo or graphic.",
+      "Set Crop X, Y, Width, and Height dimensions or crop shape.",
+      "Inspect the live canvas crop bounds.",
+      "Click 'Process Files' and download your cropped image."
     ],
     faqs: [
       {
-        q: "How do crop offsets work?",
-        a: "X is the horizontal distance from the left edge; Y is the vertical distance from the top. The crop starts at the (X, Y) point."
-      },
-      {
-        q: "Does cropping reduce file size?",
-        a: "Yes. Cropped images contain fewer pixels, resulting in smaller file sizes."
-      },
-      {
-        q: "Is my cropped image private?",
-        a: "Yes. PDFDock processes images entirely in browser memory. No data is transmitted over the network."
-      },
-      {
-        q: "Can I crop to specific aspect ratios?",
-        a: "You can manually calculate dimensions for common ratios like 16:9, 4:3, or 1:1 and enter them as width and height."
-      },
-      {
-        q: "What image formats can I crop?",
-        a: "JPEG, PNG, and WebP images are all supported for cropping."
+        q: "Can I perform circular photo crops?",
+        a: "Yes! Choose 'Circle / Oval' under Crop Shape to trim profile avatars and logos cleanly with transparent PNG backgrounds."
       }
     ],
     comparison: {
-      heading: "Best Free Online Image Cropper — PDFDock",
-      intro: "Crop your images with pixel-perfect precision — no upload, no signup, completely private.",
+      heading: "Private Image Cropping — PDFDock",
+      intro: "Crop photos securely without uploading personal images.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No — browser-based", others: "Yes" },
-        { feature: "Precision", pdfdock: "Exact pixel offsets", others: "Visual drag only" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Images uploaded" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited" },
-        { feature: "Preview", pdfdock: "Live preview", others: "Varies" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" }
+        { feature: "Upload Required", pdfdock: "No", others: "Yes" },
+        { feature: "Shape Support", pdfdock: "Rectangle & Circle", others: "Rectangle only" }
       ]
     }
   },
+
   "rotate-pdf": {
     title: "Rotate PDF — Turn PDF Pages Free Online",
     description: "Rotate PDF pages 90°, 180°, 270°. Free, private, no upload. Best alternative to iLovePDF rotate. Works in browser on any device.",
     h1: "Rotate PDF Pages Online",
-    intro: "Rotate all pages in your PDF document by 90°, 180°, or 270° to fix orientation issues. Perfect for scanned documents, presentations, and forms. Fully offline processing with zero server involvement. A private alternative to iLovePDF and SmallPDF rotation tools.",
-    keywords: ["rotate pdf", "turn pdf pages", "pdf rotation", "flip pdf", "change pdf orientation", "rotate pdf online", "rotate pdf pages free", "rotate pdf without uploading", "ilovepdf rotate alternative", "fix pdf orientation"],
+    intro: "Rotate skewed or inverted PDF pages by 90, 180, or 270 degrees. PDFDock modifies page orientation flags inside the PDF dictionary structure locally in browser RAM.",
+    keywords: [
+      "rotate pdf", "turn pdf pages", "pdf rotation", "flip pdf",
+      "change pdf orientation", "rotate pdf online", "rotate pdf pages free"
+    ],
     relatedSlugs: ["merge-pdf", "split-pdf", "remove-pages"],
     steps: [
-      "Select your PDF document.",
-      "Choose a rotation angle — 90°, 180°, or 270°.",
-      "Click 'Process Files' to rotate pages locally.",
-      "Download the rotated PDF."
+      "Select your PDF file.",
+      "Choose 'Rotate Right (90°)' or 'Rotate Left (270°)' buttons.",
+      "Click 'Process Files' to adjust document metadata.",
+      "Download your re-oriented PDF file."
     ],
     faqs: [
       {
-        q: "Does this rotate all pages at once?",
-        a: "Yes. The rotation angle is applied to every page in the document uniformly."
-      },
-      {
-        q: "Can I undo a rotation?",
-        a: "Yes — simply upload the rotated file and apply the opposite angle (e.g., 270° to reverse a 90° rotation)."
-      },
-      {
-        q: "Is PDF rotation secure?",
-        a: "Completely. Processing runs client-side in JavaScript. Your document never leaves your device."
-      },
-      {
-        q: "Will rotation affect page content?",
-        a: "No. Text, images, and annotations are all preserved perfectly — only the viewing orientation changes."
-      },
-      {
-        q: "Does this work on mobile browsers?",
-        a: "Yes. PDFDock works on Chrome, Safari, and Firefox across all mobile and desktop platforms."
+        q: "Does rotating PDF pages alter document quality?",
+        a: "No. Rotation only updates page transformation matrix tags in the PDF header. Text and image streams remain untouched."
       }
     ],
     comparison: {
-      heading: "Rotate PDF Privately — PDFDock vs iLovePDF",
-      intro: "Fix PDF orientation without uploading your documents to third-party servers.",
+      heading: "PDF Rotation — PDFDock vs Cloud Tools",
+      intro: "Fix PDF orientation privately on your device.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No", others: "Yes" },
-        { feature: "Rotation Options", pdfdock: "90°, 180°, 270°", others: "90°, 180°, 270°" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Server-side" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" },
-        { feature: "Speed", pdfdock: "Instant — no upload", others: "Depends on file size" }
+        { feature: "Upload Required", pdfdock: "No", others: "Yes" },
+        { feature: "Quality Change", pdfdock: "Zero (Metadata tweak)", others: "May re-compress" }
       ]
     }
   },
+
   "remove-pages": {
     title: "Remove PDF Pages — Delete Pages Free Online",
     description: "Delete unwanted pages from any PDF. Free, private, no upload. Works in browser on any device worldwide. Best PDF page remover.",
-    h1: "Remove Pages from PDF",
-    intro: "Discard specific pages from your PDF and download the cleaned document. Simply specify page numbers and PDFDock removes them instantly — all processing runs offline in your browser. No upload, no signup, completely private.",
-    keywords: ["remove pdf pages", "delete pdf pages", "remove pages from pdf", "pdf page remover", "extract pdf pages", "delete pages from pdf free", "remove pdf pages without uploading", "pdf page deleter online"],
+    h1: "Remove Pages from PDF Online",
+    intro: "Delete blank or unnecessary pages from PDF documents easily. PDFDock highlights page indices visually, allowing you to select and strip unwanted pages from the byte stream in local memory.",
+    keywords: [
+      "remove pdf pages", "delete pdf pages", "remove pages from pdf",
+      "pdf page remover", "delete pages from pdf free"
+    ],
     relatedSlugs: ["split-pdf", "merge-pdf", "rotate-pdf"],
     steps: [
-      "Add your PDF document to the workspace.",
-      "Enter the page numbers to remove (e.g., '2, 4, 6').",
-      "Click 'Process Files' to remove the specified pages.",
-      "Download the cleaned PDF document."
+      "Upload your PDF document.",
+      "Use the interactive visual page grid or type comma-separated page numbers to remove.",
+      "Click 'Process Files' to strip targeted pages.",
+      "Download your updated PDF."
     ],
     faqs: [
       {
-        q: "How do I specify which pages to remove?",
-        a: "Enter page numbers separated by commas, e.g., '2, 4, 7'. Those pages will be removed from the final document."
-      },
-      {
-        q: "Can I remove all pages from a PDF?",
-        a: "No. A PDF must contain at least one page. The tool will alert you if you try to remove every page."
-      },
-      {
-        q: "Is my original file affected?",
-        a: "No. PDFDock creates a new file with the specified pages removed. Your original file remains untouched on your device."
-      },
-      {
-        q: "Does this work with large PDFs?",
-        a: "Yes. Page removal works efficiently regardless of document size since only page references are modified."
-      },
-      {
-        q: "Can I remove pages from a scanned PDF?",
-        a: "Absolutely. Scanned PDF pages are handled the same as text-based pages."
+        q: "How do I select pages to delete?",
+        a: "You can click individual page cards in the Visual Page Selector grid or enter page indices (e.g. '2, 4, 7')."
       }
     ],
     comparison: {
-      heading: "Delete PDF Pages Privately — PDFDock",
-      intro: "Remove unwanted pages from your PDFs without uploading sensitive documents.",
+      heading: "Remove PDF Pages Privately",
+      intro: "Delete pages without uploading confidential files.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No", others: "Yes" },
-        { feature: "Page Selection", pdfdock: "Comma-separated numbers", others: "Visual selector" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Server-side" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" },
-        { feature: "Original File", pdfdock: "Untouched", others: "Varies" }
+        { feature: "Upload Required", pdfdock: "No", others: "Yes" },
+        { feature: "Visual Selector Grid", pdfdock: "Included free", others: "Paid feature" }
       ]
     }
   },
+
   "add-watermark": {
     title: "Add Watermark to PDF — Stamp Text Free Online",
     description: "Add custom text watermarks to PDF pages. Set size, color, opacity. 100% offline, no upload. Free alternative to iLovePDF watermark.",
-    h1: "Add Watermark to PDF",
-    intro: "Stamp custom text watermarks onto every page of your PDF. Configure font size, color, opacity, and position (center, corners). Perfect for marking documents as CONFIDENTIAL, DRAFT, or adding your brand. All processing is private and offline.",
-    keywords: ["add watermark to pdf", "pdf watermark", "stamp pdf", "text watermark pdf", "mark pdf confidential", "watermark pdf online free", "add watermark without uploading", "pdf stamp tool", "confidential watermark pdf"],
+    h1: "Add Watermark to PDF Pages Online",
+    intro: "Stamp custom text overlays (such as 'CONFIDENTIAL', 'DRAFT', or copyright notices) onto all pages of your PDF document. Customize font size, fill color, placement position, and opacity levels locally.",
+    keywords: [
+      "add watermark to pdf", "pdf watermark", "stamp pdf", "text watermark pdf",
+      "mark pdf confidential", "watermark pdf online free"
+    ],
     relatedSlugs: ["add-page-numbers", "protect-pdf", "merge-pdf"],
     steps: [
-      "Upload your PDF document.",
-      "Type your watermark text (e.g., 'CONFIDENTIAL', 'DRAFT').",
-      "Configure font size, opacity, color, and position.",
-      "Click 'Process Files' to stamp watermarks on every page.",
+      "Drop your PDF document into the watermark generator.",
+      "Type your watermark text string (e.g. 'CONFIDENTIAL').",
+      "Adjust Opacity, Font Size, Fill Color, and Position parameters.",
+      "Click 'Process Files' to stamp text layers across pages.",
       "Download your watermarked PDF."
     ],
     faqs: [
       {
-        q: "What fonts are available for watermarks?",
-        a: "PDFDock uses Helvetica Bold — a universal, professional font supported by all PDF readers worldwide."
-      },
-      {
         q: "Can I adjust watermark transparency?",
-        a: "Yes. Set opacity from 0.1 (very faint) to 1.0 (fully solid) to control visibility."
-      },
-      {
-        q: "Does this support image watermarks?",
-        a: "Currently text-only. Image watermark support is planned for a future release."
-      },
-      {
-        q: "Where can I position the watermark?",
-        a: "Center (with 45° tilt), top-left, top-right, bottom-left, or bottom-right corners."
-      },
-      {
-        q: "Are watermarked PDFs compatible with all readers?",
-        a: "Yes. The watermark is embedded as standard PDF text — compatible with Adobe Acrobat, Preview, Chrome, and all PDF readers."
+        a: "Yes. Use the Opacity slider (5% to 100%) to create subtle background stamps or prominent security markings."
       }
     ],
     comparison: {
-      heading: "Add Watermarks Privately — PDFDock vs Others",
-      intro: "Stamp confidential watermarks on PDFs without uploading sensitive documents.",
+      heading: "PDF Watermarking — PDFDock Features",
+      intro: "Add watermarks to documents securely.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No", others: "Yes" },
-        { feature: "Custom Text", pdfdock: "Any text, any color", others: "Limited options" },
-        { feature: "Opacity Control", pdfdock: "0.1 to 1.0 slider", others: "Preset levels" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Server-side" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited" },
-        { feature: "Position Options", pdfdock: "5 positions + center tilt", others: "Varies" }
+        { feature: "Upload Required", pdfdock: "No", others: "Yes" },
+        { feature: "Opacity & Position Controls", pdfdock: "Full customization", others: "Preset options" }
       ]
     }
   },
+
   "add-page-numbers": {
     title: "Add Page Numbers to PDF — Number Pages Free Online",
     description: "Insert automatic page numbers into any PDF. Choose position and alignment. Free, private, no upload. Works in browser on any device.",
-    h1: "Add Page Numbers to PDF",
-    intro: "Automatically number every page of your PDF with customizable header or footer placement and left/center/right alignment. Ideal for reports, manuscripts, and professional documents. Processed entirely offline.",
-    keywords: ["add page numbers pdf", "number pdf pages", "pdf page numbering", "insert page numbers", "pdf pagination", "add page numbers to pdf free", "number pdf pages online", "pdf page numbering tool"],
+    h1: "Add Page Numbers to PDF Online",
+    intro: "Number PDF document pages automatically with configurable positions (Header or Footer) and alignment choices (Left, Center, Right). PDFDock calculates page counts and draws clean font strings directly onto page layers.",
+    keywords: [
+      "add page numbers pdf", "number pdf pages", "pdf page numbering",
+      "insert page numbers", "pdf pagination", "add page numbers to pdf free"
+    ],
     relatedSlugs: ["add-watermark", "merge-pdf", "protect-pdf"],
     steps: [
-      "Select your PDF document.",
-      "Choose alignment — left, center, or right.",
-      "Choose position — top (header) or bottom (footer).",
-      "Click 'Process Files' to embed page numbers.",
-      "Download your numbered PDF."
+      "Select your target PDF document.",
+      "Choose Vertical Position (Header or Footer).",
+      "Select Alignment Layout (Left, Center, Right) and Numbering Format.",
+      "Click 'Process Files' to insert page numbers.",
+      "Download your numbered PDF file."
     ],
     faqs: [
       {
-        q: "Where do page numbers appear?",
-        a: "In the margins at the top or bottom of every page, depending on your chosen position and alignment settings."
-      },
-      {
-        q: "What numbering format is used?",
-        a: "Pages are numbered as 'Page 1 of N', 'Page 2 of N', etc. — clear and professional."
-      },
-      {
-        q: "Is this safe for sensitive documents?",
-        a: "Yes. Processing runs 100% in your browser. No documents are ever sent to external servers."
-      },
-      {
-        q: "Can I start numbering from a specific page?",
-        a: "Currently, numbering starts from page 1. Custom start numbers are planned for a future update."
-      },
-      {
-        q: "Will numbering affect existing page content?",
-        a: "Numbers are placed in the margins to avoid overlapping with existing text and images on your pages."
+        q: "What formatting styles are available for page numbers?",
+        a: "PDFDock supports 'Page X of Y', 'X of Y', or simple numeric 'X' numbering styles."
       }
     ],
     comparison: {
-      heading: "Add Page Numbers Privately — PDFDock",
-      intro: "Number your PDF pages without uploading documents to any server.",
+      heading: "PDF Page Numbering — PDFDock Advantages",
+      intro: "Paginate PDF reports privately on your device.",
       features: [
-        { feature: "File Upload Required", pdfdock: "No", others: "Yes" },
-        { feature: "Position Options", pdfdock: "Header/Footer + L/C/R", others: "Limited" },
-        { feature: "Privacy", pdfdock: "100% private", others: "Server-side" },
-        { feature: "Free Usage", pdfdock: "Unlimited", others: "Limited" },
-        { feature: "Format", pdfdock: "'Page X of N'", others: "Varies" },
-        { feature: "Works Offline", pdfdock: "Yes", others: "No" }
+        { feature: "Upload Required", pdfdock: "No", others: "Yes" },
+        { feature: "Position & Layout Options", pdfdock: "Full header/footer control", others: "Limited presets" }
       ]
     }
   }
